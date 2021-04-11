@@ -1,0 +1,58 @@
+.homeSearchInput {border: none;}
+.homeSearchInput:focus {outline: none;}
+
+/* FONT CONFIG - HOME */
+.homeBigText {font-size: 2.7vw; font-weight: bold;}
+.homeMediumText {font-size: 1.2vw;}
+.homeSmallText {font-size: 1vw;}
+
+/* DESKTOP */
+@media(min-width: 768px){
+    /* START YOUR DAY WITH COFFEE AND GOOD MEALS */
+    .startYourDayWithCoffee {
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://user-images.githubusercontent.com/77045083/113870914-8b43ae80-97dc-11eb-9d02-d50d1e6c4fa6.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+        height: 90vh;
+        padding: 1vw 6vw;
+        position: relative;
+    }
+    .startYourDayText {font-size: 3.7vw; font-weight: 700; letter-spacing: 0.75px;}
+    .withCoffeeLeftSide {margin-top: 3vw;}
+    .weProvideHighQualityBeans {font-size: 1.6vw; margin: 1.6vw 0;}
+    .homeSearchBar {align-items: center; background: #EFEEEE; border-radius: 2vw; padding: 1vw; width: 25vw;}
+    .homeSearchBar:hover {box-shadow: 0 0.3vw 0.1vw grey;}
+    .homeSearchInput {background: transparent; font-size: 1vw; font-weight: 900;}
+    .homeSearchInput:invalid {box-shadow: none;}
+
+    /* STAFF, STORE, CUSTOMERS */
+    .staffStoreCustomersStample {padding: 3vw 6vw; position: absolute; width: 100%; margin-top: -8vw; z-index: 1;}
+    .insideThreeS {background: white; box-shadow: 0 0.3vw 0.5vw #DEDEDE; border-radius: 0.5vw; color: black; height: 22vh; justify-content: space-between; margin: auto; padding: 2vw 4vw; width: 100%;}
+    .insideSSSText {margin: 0 2.2vw;}
+    .numberTextSSS {font-size: 1.5vw; font-weight: 900}
+    .contentTextSSS {color: #4F5665; font-size: 1.1vw; letter-spacing: 0.75px;}
+    .insideStaffStoreCustomers {align-items: center; justify-content: center; width: 30%;}
+
+    /* WE PROVIDE GOOD COFFEE AND HEALTHY MEALS */
+    .weProvideGoodCoffee {background: white; height: auto; justify-content: space-between; padding: 10vw 6vw; position: relative;}
+    .youCanExploreText {margin: 1.5vw 0;}
+    .weProvideCheck {align-items: center; font-size: 1vw; margin: 1vw 0;}
+
+    /* HERE'S PEOPLE FAVOURITE */
+    .peopleFavorite {background: #F5F6F8; height: auto; padding: 6vw;}
+    .peopleFavoriteMenuList {justify-content: space-between; margin-top: 20%;}
+    .peopleFavoriteFoodCard {align-items: center; background: white; border: 0.2vw solid #DDDDDD; border-radius: 1vw; height: auto; justify-content: space-between; position: relative; width: 25vw;}
+    .peopleFavoriteCategory {align-items: center; margin: 1vw 0;}
+    .favoriteFoodImage {border-radius: 50%; height: 10vw; margin-top: -50%; width: 10vw;}
+    .favoriteFoodPrice {font-size: 1.7vw; font-weight: bold; margin: 2vw 0;}
+    .selectFavoriteFoodButton {background: white; border: 0.1vw solid #FFBA33; border-radius: 3vw; color: #6A4029; font-size: 1vw; font-weight: bold; margin-bottom: 5vw; padding: 0.3vw 3vw;}
+
+    /* VISIT OUR STORE / MAP */
+    .visitOurStore {align-items: center; height: auto;}
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+    .homepageDesktop {display: none;}
+}
