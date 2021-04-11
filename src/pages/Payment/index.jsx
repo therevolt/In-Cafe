@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Heading5,BtnLg} from '../../components/atoms'
 import {Navbar} from '../../components/organisme'
 import {Footer} from '../../components/templates'
@@ -7,17 +7,24 @@ import img_dummy from '../../assets/img_dummy_1.png'
 import axios from 'axios'
 import swal from 'sweetalert'
 import { useHistory } from 'react-router-dom'
+import { CustomButton } from '../../components/atoms'
 
 function Payment() {
+    const [productData, setProductData] = useState({})
+    const [paymentMethod, setPayment] = useState("")
     const history = useHistory()
     const setupPayment = () => {
-        if(localStorage.getItem("transactionId") === null) {alert("Invalid payment")}
+        if(localStorage.getItem("transactionId") === null)  {swal("Error!", "Invalid payment bosku ~", "error") }
+        else if(paymentMethod === "") { swal("Payment?", "Pilih metode pembayarannya dulu dong ~", "warning") }
         else {
             const orderData = {
                 productId: localStorage.getItem("productId"),
                 transactionId: localStorage.getItem("transactionId"),
                 sizeProduct: localStorage.getItem("sizeProduct")
             }
+            axios.get(process.env.REACT_APP_SERVER + "/v1/trx/done/" + localStorage.getItem("transactionId"), { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
+            .then((res) => { console.log(res.data.data) })
+            .catch((err) => { console.log(err.response) })
             axios.post(process.env.REACT_APP_SERVER + "/v1/order", orderData, { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
             .then((res) => { 
                 console.log(res.data.data)
@@ -25,6 +32,12 @@ function Payment() {
             .catch((err) => { console.log(err.response) })
         }
     }
+    useEffect(() => {
+        axios.get(process.env.REACT_APP_SERVER + "/v1/product/" + localStorage.getItem("productId"))
+        .then((res) => { setProductData(res.data.data) })
+        .catch((err) => { console.log(err.response) })
+    }, [])
+    if(localStorage.getItem("token") === null) { swal("Belum login?", "Login dulu, yuk?", "warning").then(() => { history.push("/user/Login") }) }
     return (
         <div className="showInAnimation homepageDesktop">
             <Navbar />
@@ -40,7 +53,7 @@ function Payment() {
                             {/* card */}
                             <div className='bg-white rounded-md px-4 py-4'>
                                 <div className='my-5 text-center'>
-                                    <h3 className='font-weight-bold m-0 text-coklat'>Order Sumary</h3>
+                                    <h3 className='font-weight-bold m-0 text-coklat'>Order Summary</h3>
                                 </div>
                                 <div className="d-flex justify-content-between border-bottom py-2">
                                     <div className='align-self-center'>
@@ -64,7 +77,7 @@ function Payment() {
                                     value='TOTAL'
                                     />
                                     <Heading5
-                                    value='IDR 150.000'
+                                    value={"IDR " + productData.price * localStorage.getItem("howMuch")}
                                     />
                                 </div>
                             </div>
@@ -93,10 +106,9 @@ function Payment() {
                                         <h3 className='fw-700 text-white mb-3'>Payment Method</h3>
                                     </div>
                                     <div className='bg-white rounded-md px-4 py-4'>
-                                        <div className='border-bottom'>
-                                            {/* <div className="d-flex">
-                                                <input type="radio" />
-                                            </div> */}
+                                        <div className='border-bottom displayRow' style={{justifyContent: "space-between"}}>
+                                            <CustomButton bgClr="#FFBA33" brRad="0.5vw" btnPdg="0.5vw 1.5vw" ftSize="1vw" ftWg="bold" mrgn="1vw 0" txClr="white" value="Payment One" onClick={() => {setPayment("One")}}/>
+                                            <CustomButton bgClr="indianred" brRad="0.5vw" btnPdg="0.5vw 2vw" ftSize="1vw" ftWg="bold" mrgn="1vw 0" txClr="white" value="Payment Two" onClick={() => {setPayment("Two")}}/>
                                         </div>
                                     </div>
                                 </div>

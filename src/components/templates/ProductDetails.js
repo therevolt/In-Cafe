@@ -28,7 +28,7 @@ export default function ProductDetails(){
       axios.delete(process.env.REACT_APP_SERVER + "/v1/product/" + paramsId, {
          headers: { Authorization: 'Bearer ' + localStorage.getItem("token"), 'Content-Type': 'multipart/form-data' }
       })
-      .then((res) => { swal("Success", "Berhasil hapus makanan dari list!", "success").then(() => {history.push("/user/Products")}) })
+      .then((res) => { swal("Success", "Berhasil hapus makanan dari list!", "success").then(() => {history.push("/Products")}) })
       .catch((err) => { console.log(err.response) })
    }
    const createTransaction = () => {
@@ -36,7 +36,9 @@ export default function ProductDetails(){
       const transactionData = {
          subTotal: sumPrice,
          sizeProduct: sizeChosen,
-         deliveryMethod: deliveryChosen
+         deliveryMethod: deliveryChosen,
+         tax: 0,
+         postageCost: 0
       }
       console.log(transactionData)
       if(howMuchProduct === 0) { swal("Failed", "Untuk pemesanan menu minimal satu ~", "error") }
@@ -48,6 +50,7 @@ export default function ProductDetails(){
             localStorage.setItem("transactionId", res.data.data.id)
             localStorage.setItem("productId", getProductDetail.id)
             localStorage.setItem("sizeProduct", sizeChosen)
+            localStorage.setItem("howMuch", howMuchProduct)
             swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => {history.push("/user/Payment")}) 
          })
          .catch((err) => { console.log(err.response) })
@@ -55,12 +58,15 @@ export default function ProductDetails(){
    }
    // use effect
    useEffect(() => {
-      axios.get(process.env.REACT_APP_SERVER + "/v1/product/" + paramsId)
-      .then((res) => { setProductDetailData(res.data.data) })
-      .catch((err) => { swal("Not found!", "Produk tidak ditemukan!", "error").then(() => {history.push("/Products")}) })
-      axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-      .then((res) => { setUserData(res.data.data) })
-      .catch((err) => { console.log(err.response) })
+      if(localStorage.getItem("token") === null) { swal("Belum login?", "Login dulu, yuk?", "warning").then(() => { history.push("/user/Login") }) }
+      else {
+         axios.get(process.env.REACT_APP_SERVER + "/v1/product/" + paramsId)
+            .then((res) => { setProductDetailData(res.data.data) })
+            .catch((err) => { swal("Not found!", "Produk tidak ditemukan!", "error").then(() => {history.push("/Products")}) })
+         axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
+            .then((res) => { setUserData(res.data.data) })
+            .catch((err) => { console.log(err.response) })
+      }
    }, [])
    // destructuring
    const {name, price, description, size, startHour, endHour, stock, deliveryMethod, image} = getProductDetail
@@ -148,7 +154,7 @@ export default function ProductDetails(){
                   <img src={image} style={{borderRadius: "50%", height: "5vw", width: "5vw"}}/>
                   <div className="displayColumn poppinsFont" style={{fontSize: "1vw", margin: "0 3vw"}}>
                      <p style={{fontSize: "1.5vw", fontWeight: "bold"}}>{name}</p>
-                     <div>{"x" + howMuchProduct + " (" + sizeChosen + ")"}</div>
+                     <div>{"x" + howMuchProduct + (sizeChosen === "" ? "" : " (" + sizeChosen + ")")}</div>
                   </div>
                </div>
                <div className="displayRow" style={{alignItems: "center", justifyContent: "space-between", width: "20%"}}>

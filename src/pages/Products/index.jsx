@@ -23,7 +23,12 @@ export default function Products(){
       .then((res) => { setProfileData(res.data.data.role) })
       .catch((err) => { console.log(err.response) })
    }, [])
-
+   const changeCategory = (category) => {
+      if(category !== productCategory) {
+         setProductDetailData("")
+         setProductCategory(category)  
+      }
+   }
    useEffect(() => {
       if(productCategory === "Favourite") {
          axios.get(process.env.REACT_APP_SERVER + "/v1/product/")
@@ -78,14 +83,19 @@ export default function Products(){
             </div>
             <div className="displayColumn ourProductsRightSide">
                <div className="displayRow productCategory">
-                  <Link className="productCategoryBtn" onClick={ () => {setProductCategory("Favourite")} } style={productCategory === "Favourite" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Favourite Product</Link>
-                  <Link className="productCategoryBtn" onClick={ () => {setProductCategory("coffe")} } style={productCategory === "coffe" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Coffee</Link>
-                  <Link className="productCategoryBtn" onClick={ () => {setProductCategory("NonCoffee")} } style={productCategory === "NonCoffee" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Non-Coffee</Link>
-                  <Link className="productCategoryBtn" onClick={ () => {setProductCategory("food")} } style={productCategory === "food" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Foods</Link>
-                  <Link className="productCategoryBtn" onClick={ () => {setProductCategory("AddOn")} } style={productCategory === "AddOn" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Add-on</Link>
+                  <Link className="productCategoryBtn" onClick={ () => {changeCategory("Favourite")} } style={productCategory === "Favourite" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Favourite Product</Link>
+                  <Link className="productCategoryBtn" onClick={ () => {changeCategory("coffe")} } style={productCategory === "coffe" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Coffee</Link>
+                  <Link className="productCategoryBtn" onClick={ () => {changeCategory("NonCoffee")} } style={productCategory === "NonCoffee" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Non-Coffee</Link>
+                  <Link className="productCategoryBtn" onClick={ () => {changeCategory("food")} } style={productCategory === "food" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Foods</Link>
+                  <Link className="productCategoryBtn" onClick={ () => {changeCategory("AddOn")} } style={productCategory === "AddOn" ? {borderBottom: "0.2vw solid #6A4029", color: "#6A4029", fontWeight: "bold"} : null}>Add-on</Link>
                </div>
                <div className="row" style={{textAlign: "center"}}>
-                  {getProductDetail.slice(0,12).map((item) => 
+                  {getProductDetail === "" ?
+                  <div style={{marginTop: "5.5vw", width: "100%"}}>
+                     <img src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"/>
+                  </div>
+                  :
+                  getProductDetail.slice(0,12).map((item) => 
                   <div className="col-sm-3" style={{marginTop: "5vw"}}>
                      <div className="displayColumn foodProductBorder hoverThis" onClick={()=> {history.push("/ProductDetails/" + item.id)}}>
                         <img src={item.image} style={{borderRadius: "50%", height: "8vw", top: "-3vw", position: "absolute", width: "8vw"}}/>
@@ -95,7 +105,8 @@ export default function Products(){
                         </div>
                      </div>
                   </div>
-                  )}
+                  )
+                  }
                </div>
                <div>
                   {userProfileRole === "admin" ? <CustomButton bgClr="#6A4029" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="3vw 0 7.5vw 0" txClr="white" value="Add new product" wd="100%" onClick={() => {history.push("/admin/AddProduct")}}/> : null}

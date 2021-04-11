@@ -30,19 +30,19 @@ export default function PeopleFavorite(){
                         <p className="homeMediumText" style={{fontWeight: "bold", marginBottom: "2vw"}}>{item.name}</p>
                         <div className="displayRow homeSmallText peopleFavoriteCategory">
                            <img src="https://user-images.githubusercontent.com/77045083/113905664-95c27000-97fd-11eb-9711-62c1c0298107.png" style={{height: "1vw", marginRight: "2.2vw"}}/>
-                           (keterangan 1)
+                           Amazing
                         </div>
                         <div className="displayRow homeSmallText peopleFavoriteCategory">
                            <img src="https://user-images.githubusercontent.com/77045083/113905664-95c27000-97fd-11eb-9711-62c1c0298107.png" style={{height: "1vw", marginRight: "2.2vw"}}/>
-                           (keterangan 2)
+                           Delicious
                         </div>
                         <div className="displayRow homeSmallText peopleFavoriteCategory">
                            <img src="https://user-images.githubusercontent.com/77045083/113905664-95c27000-97fd-11eb-9711-62c1c0298107.png" style={{height: "1vw", marginRight: "2.2vw"}}/>
-                           (keterangan 3)
+                           Tasteful
                         </div>
                         <div className="displayRow homeSmallText peopleFavoriteCategory">
                            <img src="https://user-images.githubusercontent.com/77045083/113905664-95c27000-97fd-11eb-9711-62c1c0298107.png" style={{height: "1vw", marginRight: "2.2vw"}}/>
-                           (keterangan 4)
+                           Unforgetable
                         </div>
                      </div>
                   </div>
