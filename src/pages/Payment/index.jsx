@@ -6,8 +6,10 @@ import {Footer} from '../../components/templates'
 import img_dummy from '../../assets/img_dummy_1.png'
 import axios from 'axios'
 import swal from 'sweetalert'
+import { useHistory } from 'react-router-dom'
 
 function Payment() {
+    const history = useHistory()
     const setupPayment = () => {
         if(localStorage.getItem("transactionId") === null) {alert("Invalid payment")}
         else {
@@ -19,7 +21,7 @@ function Payment() {
             axios.post(process.env.REACT_APP_SERVER + "/v1/order", orderData, { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
             .then((res) => { 
                 console.log(res.data.data)
-                swal("Berhasil!", "Pesanan selesai, makanan kamu akan segera di proses ~", "success").then(() => {window.location = "/user/History"}) })
+                swal("Berhasil!", "Pesanan selesai, makanan kamu akan segera di proses ~", "success").then(() => {history.push("/user/History")}) })
             .catch((err) => { console.log(err.response) })
         }
     }
