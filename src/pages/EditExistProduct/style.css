@@ -1,0 +1,10 @@
+/* DESKTOP */
+@media(min-width: 768px){
+   .editProductLeft {width: 33%;}
+   .editProdutRight {width: 53%;}
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+   .editProductDesktop {display: none;}
+}

@@ -1,0 +1,13 @@
+/* DESKTOP */
+@media(min-width: 768px){
+   .addProductLeft{width: 33%;}
+   .addProductRight{color: #6A4029; font-size: 1.5vw; font-weight: bold; width: 53%;}
+   .addNewProductInputNumber {border: 0.1vw solid #9F9F9F; border-radius: 0.5vw; margin-bottom: 0.5vw; padding: 1vw 2vw;}
+   .newProductInputForm {border: none; border-bottom: 0.1vw solid #4F5665; font-size: 1vw; margin: 1vw 0 3vw 0; padding: 1vw 0; width: 100%;}
+   .newProductInputForm:focus {outline: none;}
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+   .addProductDesktop {display: none;}
+}

@@ -1,0 +1,26 @@
+/* DESKTOP */
+@media(min-width: 768px){
+  .ourProductsLeftSide {align-items: center; border-right: 0.1vw solid #DEDEDE; justify-content: center; width: 30vw;}
+  .ourProductsRightSide {padding: 0 7vw; width: 70vw;}
+  .promoForYouText {color: #6A4029; font-size: 1.5vw; font-weight: 600; padding: 1.5vw 0;}
+  .productCoupons {align-items: center;}
+  .yellowProductCoupons {background: #FFCB65; height: 70vh; position: relative; text-align: center; transition-duration: 0.5s; z-index: 2;}
+  .yellowProductCoupons:hover {background: #ffde9b; cursor: pointer;}
+  .yellowTopCoupons {border-bottom: 0.15vw dashed black; padding: 2vw;}
+  .yellowBottomCoupons {padding: 2vw 0;}
+  .blackProductCoupons {background: black; height: 60vh; left: 8%; position: absolute; width: 10vw; z-index: 1;}
+  .brownProductCoupons {background: #6A4029; height: 50vh; left: 9.5%; position: absolute; width: 10vw; z-index: 0;}
+  .yellowProductCoupons, .blackProductCoupons, .brownProductCoupons {border-radius: 1.5vw; width: 17vw;}
+  .foodCouponTitle {font-size: 1.3vw; font-weight: bold;}
+  .couponsWillBeUpdatedText, .checkThemOutText, .couponsTermsAndCondition {font-size: 0.8vw;}
+  .couponsTermsAndCondition {margin: 5vw 0;}
+  .productCategory {justify-content: space-between; width: 100%;}
+  .productCategoryBtn {color: #9F9F9F; font-size: 1.2vw; padding-top: 2vw; padding-bottom: 1vw;}
+  .productCategoryBtn:hover {color: #6A4029; text-decoration: none;}
+  .foodProductBorder {align-items: center; border-radius: 2.2vw; box-shadow: 0 1.5vw 3vw rgba(57, 57, 57, 0.1); height: 15vw; margin: 0 1vw; padding: 1vw; width: 10vw;}
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+  
+}

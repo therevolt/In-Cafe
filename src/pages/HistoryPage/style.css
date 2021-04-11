@@ -1,0 +1,26 @@
+/* DESKTOP */
+@media(min-width: 768px){
+   .historyPage {
+      align-items: center;
+      background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://user-images.githubusercontent.com/77045083/114286407-96226b80-9a88-11eb-891d-53affcc2a910.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: auto;
+      padding: 3vw;
+      width: auto;
+   }
+   .historyCard {
+      background: white;
+      border-radius: 1vw;
+      color: black;
+      margin: auto;
+      margin-bottom: 2.5vw;
+      padding: 1vw;
+      width: 99%;
+   }
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+   .historyPage {display: none;}
+}
