@@ -6,7 +6,7 @@ export default function EditExistProduct() {
    const history = useHistory()
    useEffect(() => {
       axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-      .then((res) => { res.data.data.role === "admin" ? null : history.push("/Home") })
+      .then((res) => { return res.data.data.role === "admin" ? null : history.push("/Home") })
       .catch((err) => { console.log(err.response) })
       }, [])
    return(

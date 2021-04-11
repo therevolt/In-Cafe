@@ -152,7 +152,7 @@ export default function ProductDetails(){
                   </div>
                </div>
                <div className="displayRow" style={{alignItems: "center", justifyContent: "space-between", width: "20%"}}>
-                  <div className="displayColumn hoverThis plusMinusBtn" onClick={() => { howMuchProduct <= 0 ? "" : plusMinusProductNumber(howMuchProduct - 1) }}>-</div>
+                  <div className="displayColumn hoverThis plusMinusBtn" onClick={() => { return howMuchProduct <= 0 ? null : plusMinusProductNumber(howMuchProduct - 1) }}>-</div>
                   <div style={{fontSize: "1.5vw", fontWeight: "1000"}}>{howMuchProduct}</div>
                   <div className="displayColumn hoverThis plusMinusBtn" onClick={() => { plusMinusProductNumber(howMuchProduct + 1) }}>+</div>
                </div>
