@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 export default function EditExistProduct() {
+   const history = useHistory()
    useEffect(() => {
       axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
       .then((res) => { res.data.data.role === "admin" ? null : history.push("/Home") })

@@ -11,7 +11,10 @@ export default function PeopleFavorite(){
       .then((res) => { setFoodData(res.data.data) })
       .catch((err) => { console.log(err.response) })
    }, [])
-   console.log(foodData)
+   // SHUFFLE 3 RANDOM FOODS
+   const shuffleFoodData = foodData.sort(() => 0.5 - Math.random())
+   const selectShuffledFood = shuffleFoodData.slice(0,3)
+   // RETURN
    return(
       <div className="displayColumn peopleFavorite rubikFont">
          <div style={{textAlign: "center"}}>
@@ -19,7 +22,7 @@ export default function PeopleFavorite(){
             <p className="homeMediumText">Let's choose and have a bit taste of people's favorite. It might be yours too!</p>
          </div>
          <div className="displayRow peopleFavoriteMenuList">
-            {foodData.slice(0,3).map((item) => 
+            {selectShuffledFood.map((item) => 
                <div className="displayColumn peopleFavoriteFoodCard" style={selectFavoriteFood === item.name ? {border: "0.2vw solid #6A4029"} : null}>
                   <div className="displayColumn" style={{textAlign: "center"}}>
                      <img className="favoriteFoodImage" src={item.image}/>

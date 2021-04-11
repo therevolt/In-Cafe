@@ -14,7 +14,7 @@ export default function AddNewProduct(){
    // USE EFFECT
    useEffect(() => {
       axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-      .then((res) => { res.data.data.role === "admin" ? null : history.push("/Home") })
+      .then((res) => { res.data.data.role === "admin" ? "" : history.push("/Home") })
       .catch((err) => { console.log(err.response) })
       }, [])
    // UPLOAD IMAGE
@@ -115,6 +115,7 @@ export default function AddNewProduct(){
       })
       .catch((err) => { console.log(err.response) })
    }
+   console.log(createData)
    // RETURN
    return(
       <div className="addNewProduct displayRow rubikFont" style={{justifyContent: "space-between", padding: "6vw"}}>
