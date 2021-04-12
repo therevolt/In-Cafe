@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useLocation, useHistory} from 'react-router-dom'
+import swal from 'sweetalert'
 import axios from 'axios'
 
 function UserVerify() {
@@ -13,23 +14,26 @@ function UserVerify() {
     }
     const query = useQuery();
     const token = query.get('token')
-    axios({
-        method : 'GET',
-        url : `${process.env.REACT_APP_SERVER}/v1/users/verify`,
-        headers : { Authorization: `Bearer ${token}` }
-    })
-    .then(response=>{
-        if(response.data.status == true){
-            history.push('/user/login')
-        }
-    })
-    .catch(err => {
-        if(err){
-            setMessage({
-                error : 'ERROR 500 Server Down !!!'
-            })
-        }
-    })
+    useEffect(()=>{
+        axios({
+            method : 'GET',
+            url : `${process.env.REACT_APP_SERVER}/v1/users/verify`,
+            headers : { Authorization: `Bearer ${token}` }
+        })
+        .then(response=>{
+            if(response.data.status == true){
+                swal('Berhasil', 'Acount  Veryfied', 'success')
+                history.push('/user/login')
+            }
+        })
+        .catch(err => {
+            if(err){
+                setMessage({
+                    error : 'ERROR 500 Server Down !!!'
+                })
+            }
+        })
+    },[])
     return (
         <div className='container'>
             <h1 className='text-center color-gray mt-5'>{message.error}</h1>

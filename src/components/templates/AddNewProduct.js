@@ -75,7 +75,7 @@ export default function AddNewProduct(){
       else { createData.deliveryMethod.push(e.target.outerText) }
    }
    // ADD NEW FOOD
-   const createMovieSubmit = () => {
+   const createNewMenu = () => {
       const {
          name, 
          price, 
@@ -100,22 +100,19 @@ export default function AddNewProduct(){
       foodData.append("deliveryMethod", JSON.stringify(deliveryMethod))
       foodData.append("category", category)
       foodData.append("image", image)
-      console.log(createData)
       // POST DATA TO BACKEND (CREATE)
       axios.post(process.env.REACT_APP_SERVER + "/v1/product", foodData, {
          headers: { Authorization: 'Bearer ' + localStorage.getItem("token"), 'Content-Type': 'multipart/form-data' }
       })
       .then((res) => {
-         console.log(res.data)
          Swal.fire(
             "Berhasil!", 
             name + " berhasil di tambahkan ke dalam menu!", 
             "success")
-         .then(() => { history.push("/Products") })
+         .then(() => { history.push("/Products?page=1&limit=8") })
       })
       .catch((err) => { console.log(err.response) })
    }
-   console.log(createData)
    // RETURN
    return(
       <div className="addNewProduct displayRow rubikFont" style={{justifyContent: "space-between", padding: "6vw"}}>
@@ -177,7 +174,7 @@ export default function AddNewProduct(){
                      value="Take Away"/>
                </div>
             </div>
-            <CustomButton bgClr="#6A4029" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="5vw 0 0 0" txClr="white" type="submit" value="Save product" wd="100%" onClick={() => { createMovieSubmit() }}/>
+            <CustomButton bgClr="#6A4029" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="5vw 0 0 0" txClr="white" type="submit" value="Save product" wd="100%" onClick={() => { createNewMenu() }}/>
          </div>
       </div>
    )

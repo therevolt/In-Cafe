@@ -28,7 +28,7 @@ export default function ProductDetails(){
       axios.delete(process.env.REACT_APP_SERVER + "/v1/product/" + paramsId, {
          headers: { Authorization: 'Bearer ' + localStorage.getItem("token"), 'Content-Type': 'multipart/form-data' }
       })
-      .then((res) => { swal("Success", "Berhasil hapus makanan dari list!", "success").then(() => {history.push("/Products")}) })
+      .then((res) => { swal("Success", "Berhasil hapus makanan dari list!", "success").then(() => { history.push("/Products?page=1&limit=8") }) })
       .catch((err) => { console.log(err.response) })
    }
    const createTransaction = () => {
@@ -86,7 +86,7 @@ export default function ProductDetails(){
                <CustomButton bgClr="#6A4029" brRad="1vw" btnPdg="1vw 3vw" ftSize="1.1vw" ftWg="bold" mrgn="0.77vw 0" txClr="white" value="Add to Cart" wd="100%"></CustomButton>
                {userData.role === "admin" 
                ?
-               <CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1vw 3vw" ftSize="1.1vw" ftWg="bold" mrgn="0.77vw 0" txClr="#6A4029" value="Edit Product" wd="100%" onClick={() => { history.push("/admin/EditProduct") }}></CustomButton>
+               <CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1vw 3vw" ftSize="1.1vw" ftWg="bold" mrgn="0.77vw 0" txClr="#6A4029" value="Edit Product" wd="100%" onClick={() => { history.push("/admin/EditProduct/" + paramsId) }}></CustomButton>
                :
                <CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1vw 3vw" ftSize="1.1vw" ftWg="bold" mrgn="0.77vw 0" txClr="#6A4029" value="Ask a Staff" wd="100%"></CustomButton>
                }
