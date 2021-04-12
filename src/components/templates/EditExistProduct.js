@@ -4,6 +4,7 @@ import axios from 'axios'
 import TrashBin from '../../assets/delete2.png'
 import { CustomButton, YellowLogo } from '../atoms'
 import Swal from 'sweetalert2'
+import swal from 'sweetalert'
 
 export default function EditExistProduct() {
    // EDIT PRODUCT SETUP
@@ -68,7 +69,7 @@ export default function EditExistProduct() {
       if(editFoodImg === "https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif") {
          Swal.fire(
             "Gambar makanan?", 
-            "Gimana orang mau tertarik beli nih kalau gambarnya " + name + " aja gak ada?", 
+            "Gimana orang mau tertarik beli nih kalau gambarnya aja gak ada?", 
             "error")
       }
       else{
