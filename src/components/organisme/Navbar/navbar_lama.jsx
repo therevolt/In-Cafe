@@ -1,6 +1,5 @@
 import './style.css'
 import React, { useEffect, useState } from 'react'
-import {useDispatch} from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import CoffeeLogo from '../../atoms/CoffeeLogo'
 import {BtnLg, CustomButton} from '../../atoms/'
@@ -8,8 +7,6 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 const Navbar = ()=>{
-   const dispatch = useDispatch()
-   const [key, setKey] = useState("")
    const [userProfileData, setProfileData] = useState(localStorage.getItem("token") === null ? "" : {firstName: "User", lastName: "Name", displayName: "Loading data ...", avatar: "https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif", role: "member"})
    const history = useHistory()
    const logOut = () => {
@@ -23,18 +20,6 @@ const Navbar = ()=>{
    .catch((err) => { console.log(err.response.data.message) })
    }, [])
    const {firstName, lastName, displayName, avatar, role} = userProfileData
-   const handleChangeKey = (e) => {
-      setKey(e.target.value)
-   }
-   const Search = (e) => {
-      if(key.length !== 0){
-         dispatch({
-            type : 'REQUEST_KEY',
-            payload : key
-         })
-         history.push('/Search/Products')
-      }
-   }
    return(
       <div className="navbarReusable rubikFont">
          {/* NAVBAR - DESKTOP */}
@@ -53,10 +38,7 @@ const Navbar = ()=>{
                </div>
                :
                <div className="displayRow" style={{alignItems: "center"}}>
-                  <div className='mx-3'>
-                     <input type="text" placeholder="search" className="rounded-xl py-2 px-4" style={{border:"none",background:"#EFEEEE", outline:"none"}} onChange={handleChangeKey} />
-                  </div>
-                  <Link className="hoverThis" onClick={Search}><img src="https://user-images.githubusercontent.com/77045083/113756261-621f1180-973b-11eb-94b0-e6ee1be8b9e4.png" style={{height: "1vw"}}/></Link>
+                  <Link className="hoverThis"><img src="https://user-images.githubusercontent.com/77045083/113756261-621f1180-973b-11eb-94b0-e6ee1be8b9e4.png" style={{height: "1vw"}}/></Link>
                   <Link className="hoverThis" style={{margin: "0 3vw"}}><img src="https://user-images.githubusercontent.com/77045083/113756264-62b7a800-973b-11eb-82f5-d57d95e6e664.png" style={{height: "1.5vw"}}/></Link>
                   <div className="hideFirst col-md-1 dropdown">
                      <img className="dropdown-toggle hoverThis imgNavbar" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src={avatar} style={{borderRadius:"50%"}}/>
