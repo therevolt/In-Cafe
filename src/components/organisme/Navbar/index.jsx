@@ -27,7 +27,7 @@ const Navbar = ()=>{
                <CoffeeLogo logoWidth="11vw"/>
                <div className="displayRow navFourBtn">
                   <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Home")} } style={localStorage.getItem("navbarState") === "Home" || localStorage.getItem("navbarState") === null ? {color: "#6A4029", fontWeight: "bold"} : null} to="/Home">Home</Link>
-                  <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Product")} } style={localStorage.getItem("navbarState") === "Product" ? {color: "#6A4029", fontWeight: "bold"} : null} to="/Products">Product</Link>
+                  <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Product")} } style={localStorage.getItem("navbarState") === "Product" ? {color: "#6A4029", fontWeight: "bold"} : null} to="/Products?page=1&amp;limit=4">Product</Link>
                   <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Cart")} } style={localStorage.getItem("navbarState") === "Cart" ? {color: "#6A4029", fontWeight: "bold"} : null}>Your Cart</Link>
                   <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "History")} } style={localStorage.getItem("navbarState") === "History" ? {color: "#6A4029", fontWeight: "bold"} : null} to="/user/History">History</Link>
                </div>
