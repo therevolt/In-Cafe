@@ -17,7 +17,7 @@ const Navbar = ()=>{
    useEffect(() => {
    axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
    .then((res) => { setProfileData(res.data.data) })
-   .catch((err) => { console.log(err.response) })
+   .catch((err) => { console.log(err.response.data.message) })
    }, [])
    const {firstName, lastName, displayName, avatar, role} = userProfileData
    return(

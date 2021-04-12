@@ -4,24 +4,42 @@ import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { CustomButton } from '../../components/atoms'
 import Navbar from '../../components/organisme/Navbar'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Footer } from '../../components/templates'
+import Swal from 'sweetalert2'
 
 export default function Products(){
+   // take pagination query data first
+   function useQuery() { return new URLSearchParams(useLocation().search) }
+   const query = useQuery()
+   let howManyPaginationButton = []
+
+   // use state conf
    const [userProfileRole, setProfileData] = useState("")
    const [productCategory,setProductCategory] = useState("Favourite")
    const [getProductDetail, setProductDetailData] = useState([])
+   const [queryPage, setQueryPage] = useState(query.get('page'))
+   const [queryLimit, setQueryLimit] = useState(query.get('limit'))
    const history = useHistory()
-   // use effect
+
+   // use effect starter
    useEffect(() => {
       // GET ALL PRODUCT STARTER
-      axios.get(process.env.REACT_APP_SERVER + "/v1/product/")
-      .then((res) => { setProductDetailData(res.data.data) })
-      .catch((err) => { console.log(err.response) })
-      // SEE USER ROLE
-      axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-      .then((res) => { setProfileData(res.data.data.role) })
-      .catch((err) => { console.log(err.response) })
+      if(queryPage === null || queryLimit === null || queryPage === "" || queryLimit === "") { 
+         Swal.fire("Error!", "Query paginasi (page/limit) ada yang kosong!", "error").then(() => { window.location = "/Products?page=1&limit=8" }) 
+      }
+      else {
+         axios.get(process.env.REACT_APP_SERVER + "/v1/product")
+         .then((res) => { 
+            setProductDetailData(res.data.data)
+            // SET HOW MANY PAGINATION BUTTON
+         })
+         .catch((err) => { console.log(err.response.data.message) })
+         // SEE USER ROLE
+         axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
+         .then((res) => { setProfileData(res.data.data.role) })
+         .catch((err) => { console.log(err.response.data.message) })
+      }
    }, [])
    const changeCategory = (category) => {
       if(category !== productCategory) {
@@ -29,19 +47,42 @@ export default function Products(){
          setProductCategory(category)  
       }
    }
+
+   // use effect on category change
    useEffect(() => {
       if(productCategory === "Favourite") {
-         axios.get(process.env.REACT_APP_SERVER + "/v1/product/")
-         .then((res) => { setProductDetailData(res.data.data) })
+         axios.get(process.env.REACT_APP_SERVER + "/v1/product")
+         .then((res) => { 
+            setProductDetailData(res.data.data)
+            setQueryPage("1")
+            history.push("/Products?page=" + queryPage + "&limit=" + queryLimit)
+         })
          .catch((err) => { console.log(err.response) })
       }
       else{
          const packCategory = {category: productCategory}
          axios.post(process.env.REACT_APP_SERVER + "/v1/product/cat", packCategory)
-         .then((res) => { setProductDetailData(res.data.data) })
+         .then((res) => { 
+            setProductDetailData(res.data.data)
+            setQueryPage("1")
+            history.push("/Products?page=" + queryPage + "&limit=" + queryLimit)
+         })
          .catch((err) => { setProductDetailData([]) })
       }
    }, [productCategory])
+
+   // use effect on page change
+   useEffect(() => { history.push("/Products?page=" + queryPage + "&limit=" + queryLimit) }, [queryPage])
+
+   // PARSE QUERY STRING TO INTEGER (FOR FRONT-END PAGINATION / START FROM PAGE 1)
+   const intPage = parseInt(queryPage) - 1
+   const intLimit = parseInt(queryLimit)
+
+   // SET-UP PAGINATION LOGIC (ALL)
+   const calcPaginationBtn = Math.ceil(getProductDetail.length / intLimit)
+   for(let i = 1; i <= calcPaginationBtn; i++) { howManyPaginationButton.push(i) }
+
+   // RETURN RESULT
    return(
       <div className="showInAnimation poppinsFont productsDesktop">
          <Helmet>
@@ -95,7 +136,7 @@ export default function Products(){
                      <img src="https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif"/>
                   </div>
                   :
-                  getProductDetail.slice(0,12).map((item) => 
+                  getProductDetail.slice(intLimit * intPage, intLimit * (intPage + 1)).map((item) => 
                   <div className="col-sm-3" style={{marginTop: "5vw"}}>
                      <div className="displayColumn foodProductBorder hoverThis" onClick={()=> {history.push("/ProductDetails/" + item.id)}}>
                         <img src={item.image} style={{borderRadius: "50%", height: "8vw", top: "-3vw", position: "absolute", width: "8vw"}}/>
@@ -107,6 +148,21 @@ export default function Products(){
                   </div>
                   )
                   }
+               </div>
+               <div className="displayRow rubikFont" style={{justifyContent: "center", margin: "5vw 0", width: "100%"}}>
+                  {howManyPaginationButton.map((item) => {
+                     return <div onClick={() => {setQueryPage(item)}}>
+                           <CustomButton 
+                           bgClr={item === parseInt(queryPage) ? "#6A4029" : "#F5F6F8"} 
+                           brRad="0.5vw" 
+                           btnPdg="1vw 1.5vw" 
+                           ftSize="1vw" 
+                           ftWg="bold" 
+                           mrgn="0 1vw" 
+                           txClr={item === parseInt(queryPage) ? "white" : "black"}
+                           value={item}/>
+                        </div>
+                  })}
                </div>
                <div>
                   {userProfileRole === "admin" ? <CustomButton bgClr="#6A4029" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="3vw 0 7.5vw 0" txClr="white" value="Add new product" wd="100%" onClick={() => {history.push("/admin/AddProduct")}}/> : null}
