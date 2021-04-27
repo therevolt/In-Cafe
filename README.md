@@ -22,9 +22,9 @@
 6.) Profile Page (must login first) : https://incafe.netlify.app/user/Profil  
 
   
-### In-Cafe Teams
+### In Cafe - Teams
 [Aditya Pratama](https://github.com/heatclift77) | [Erwin Saputra](https://github.com/ErwinSaputraSulistio) | [Rama Seftiansyah](https://github.com/therevolt) | [Wisnu Prasetio](https://github.com/prasetioad)
---- | --- | --- | ---
+:-: | :-: | :-: | :-:
 <img src="https://avatars.githubusercontent.com/u/73774501?v=4" alt="Aditya Pratama" width="150"/> | <img src="https://avatars.githubusercontent.com/u/77045083?v=4" alt="Aditya Pratama" width="150"/> | <img src="https://avatars.githubusercontent.com/u/58101157?v=4" alt="Rama Seftiansyah" width="150"/> | <img src="https://avatars.githubusercontent.com/u/66661143?v=4" alt="Wisnu Prasetio" width="150"/>
-Frontend | Frontend | <b>PM</b> & Backend | Backend
+Frontend | Frontend | <b>Leader</b> & Backend | Backend
 
