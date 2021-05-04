@@ -13,7 +13,7 @@
 ### In Cafe - Netlify Links :  
 
 [![made-with-VSCode](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg)](https://code.visualstudio.com/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3e5e5f0e-297c-4bbe-85d7-12793c76f338/deploy-status)](https://app.netlify.com/sites/ciwin-react-tickitz-arkademy/deploys) 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3e5e5f0e-297c-4bbe-85d7-12793c76f338/deploy-status)](https://app.netlify.com/sites/ciwin-react-tickitz-arkademy/deploys)   
 1.) Register : https://incafe.netlify.app/user/signup  
 2.) Login : https://incafe.netlify.app/user/Login  
 3.) Reset Password : https://incafe.netlify.app/user/forgotpassword  
