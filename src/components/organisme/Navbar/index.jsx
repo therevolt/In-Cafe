@@ -1,6 +1,6 @@
 import './style.css'
 import React, { useEffect, useState } from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import CoffeeLogo from '../../atoms/CoffeeLogo'
 import {BtnLg, CustomButton} from '../../atoms/'
@@ -8,6 +8,8 @@ import axios from 'axios'
 import swal from 'sweetalert'
 
 const Navbar = ()=>{
+   const {products} = useSelector(state=>state.chart)
+   const {data} = useSelector(state=>state.user)
    const dispatch = useDispatch()
    const [key, setKey] = useState("")
    const [userProfileData, setProfileData] = useState(localStorage.getItem("token") === null ? "" : {firstName: "User", lastName: "Name", displayName: "Loading data ...", avatar: "https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif", role: "member"})
@@ -17,11 +19,11 @@ const Navbar = ()=>{
       swal("Berhasil logout!", "Mengarahkan kembali ke halaman login ~", "success")
       .then(() => { history.push("/user/Login") })
    }
-   useEffect(() => {
-   axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-   .then((res) => { setProfileData(res.data.data) })
-   .catch((err) => { console.log(err.response.data.message) })
-   }, [])
+   // useEffect(() => {
+   // axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
+   // .then((res) => { setProfileData(res.data.data) })
+   // .catch((err) => { console.log(err.response.data.message) })
+   // }, [])
    const {firstName, lastName, displayName, avatar, role} = userProfileData
    const handleChangeKey = (e) => {
       setKey(e.target.value)
@@ -43,7 +45,10 @@ const Navbar = ()=>{
                <div className="displayRow navFourBtn">
                   <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Home")} } style={localStorage.getItem("navbarState") === "Home" || localStorage.getItem("navbarState") === null ? {color: "#6A4029", fontWeight: "bold"} : null} to="/Home">Home</Link>
                   <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Product")} } style={localStorage.getItem("navbarState") === "Product" ? {color: "#6A4029", fontWeight: "bold"} : null} to="/Products?page=1&amp;limit=4">Product</Link>
-                  <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Cart")} } style={localStorage.getItem("navbarState") === "Cart" ? {color: "#6A4029", fontWeight: "bold"} : null}>Your Cart</Link>
+                  <div style={{position:"relative"}}>
+                     <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "Cart")} } style={localStorage.getItem("navbarState") === "Cart" ? {color: "#6A4029", fontWeight: "bold"} : null} to="/cart" >Your Cart</Link>
+                     <div className="position-absolute rounded p-1" style={{background:"yellow", color:"red", top:"-50%", right:"-10px", fontSize:"12px"}}>{products.length}</div>
+                  </div>
                   <Link className="navBtn" onClick={ () => {localStorage.setItem("navbarState", "History")} } style={localStorage.getItem("navbarState") === "History" ? {color: "#6A4029", fontWeight: "bold"} : null} to="/user/History">History</Link>
                </div>
                {localStorage.getItem("token") === null ?
@@ -54,19 +59,23 @@ const Navbar = ()=>{
                :
                <div className="displayRow" style={{alignItems: "center"}}>
                   <div className='mx-3'>
-                     <input type="text" placeholder="search" className="rounded-xl py-2 px-4" style={{border:"none",background:"#EFEEEE", outline:"none"}} onChange={handleChangeKey} />
+                     <input type="text" placeholder="cari makanan..." className="rounded-xl py-2 px-4" style={{border:"none",background:"#EFEEEE", outline:"none", fontSize:"14px"}} onChange={handleChangeKey} onKeyUp={(e)=>{
+                        if(e.keyCode == 13){
+                           Search()
+                        }
+                     }} />
                   </div>
                   <Link className="hoverThis" onClick={Search}><img src="https://user-images.githubusercontent.com/77045083/113756261-621f1180-973b-11eb-94b0-e6ee1be8b9e4.png" style={{height: "1vw"}}/></Link>
                   <Link className="hoverThis" style={{margin: "0 3vw"}}><img src="https://user-images.githubusercontent.com/77045083/113756264-62b7a800-973b-11eb-82f5-d57d95e6e664.png" style={{height: "1.5vw"}}/></Link>
                   <div className="hideFirst col-md-1 dropdown">
-                     <img className="dropdown-toggle hoverThis imgNavbar" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src={avatar} style={{borderRadius:"50%"}}/>
+                     <img className="dropdown-toggle hoverThis imgNavbar" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src={data.avatar} style={{borderRadius:"50%"}}/>
                      <div className="hideFirst dropdown-menu dropdownUser" aria-labelledby="dropdownMenuButton">
                      <div className="userDropdownWrapper">
                            <div className="userDropdownArea">
-                              <img className="hoverThis userProfileImage" src={avatar}/>
+                              <img className="hoverThis userProfileImage" src={data.avatar}/>
                               <div className="displayColumn userProfileNameAndTitle">
-                                 <p className="mulishFont userProfileName">{firstName + " " + lastName}</p>
-                                 <p className="mulishFont userProfileTitle">{displayName}</p>
+                                 <p className="mulishFont userProfileName">{data.firstName + " " + data.lastName}</p>
+                                 <p className="mulishFont userProfileTitle">{data.displayName}</p>
                               </div>
                            </div>
                            { role === "admin" ? 

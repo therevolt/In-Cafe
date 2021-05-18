@@ -37,7 +37,8 @@ function Profil() {
         birthday: "",
         gender: "",
     });
-
+    const [avatar, setAvatar] = useState(dataUser.avatar)
+    const [loadingUpddate, setLoadingUpdate] = useState(false)
     const imgRef = useRef();
 
     useEffect(() => {
@@ -52,6 +53,7 @@ function Profil() {
             birthday: data.birthday,
             gender: data.gender,
         });
+        // console.log(data);
     }, [data]);
 
     const token = localStorage.getItem("token");
@@ -78,7 +80,7 @@ function Profil() {
     }
     function handleSubmit() {
         const formData = new FormData();
-        formData.append("avatar", dataUser.avatar);
+        formData.append("avatar", data.avatar);
         formData.append("email", dataUser.email);
         formData.append("phone", dataUser.phone);
         formData.append("address", dataUser.address);
@@ -87,18 +89,24 @@ function Profil() {
         formData.append("lastName", dataUser.lastName);
         formData.append("birthDay", dataUser.birthDay);
         formData.append("gender", dataUser.gender);
+        setLoadingUpdate(true)
         axios({
             method: "PUT",
             url: `${process.env.REACT_APP_SERVER}/v1/users`,
             data: formData,
             headers: { Authorization: `Bearer ${token}` },
         }).then((response) => {
+            setLoadingUpdate(false)
             dispatch({
                 type: "LOGIN_REQUEST",
                 payload: response.data.data,
             });
             swal("Berhasil", response.data.message, "success");
-        });
+        })
+        .catch(err=>{
+            setLoadingUpdate(false)
+            // console.log(err.response);
+        })
     }
 
     const handleChangeGender = (e) => {
@@ -155,18 +163,29 @@ function Profil() {
                         <div className="col-10 col-lg-4 my-2 my-lg-5 mx-auto">
                             <div className="card-profil bg-white py-4 px-4 text-center shadow">
                                 <div
-                                    className="mb-3 px-5 position-relative mt-4 mx-auto"
-                                    style={{ width: 260 }}
+                                    className="mb-3 rounded-circle overflow-hidden position-relative mt-4 mx-auto"
+                                    style={{ width: "140px", height:"140px" }}
                                     onClick={clickImg}
                                 >
-                                    <img src={dataUser.avatar} className="rounded-circle w-100" />
+                                    <img src={avatar} className="w-100" />
                                 </div>
                                 <div className="my-2 d-none">
                                     <input
                                         type="file"
                                         className="form-control"
-                                        onChange={(e) => {
-                                            setDataUser({ ...dataUser, avatar: e.target.files[0] });
+                                        onChange={(event) => {
+                                            if (event.target.files && event.target.files[0]) {
+                                                let reader = new FileReader();
+                                                reader.onload = (e) => {
+                                                    if (event.target.files[0].type === "image/png" || event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/jpeg") {
+                                                        setAvatar(e.target.result)
+                                                        setDataUser({ ...dataUser, avatar: event.target.files[0]});
+                                                    } else {
+                                                        swal("Oops", "hanya mendukung format gambar", "error")
+                                                    }
+                                                };
+                                                reader.readAsDataURL(event.target.files[0]);
+                                            }
                                         }}
                                         ref={imgRef}
                                     />
@@ -190,7 +209,7 @@ function Profil() {
                                 </div>
                                 <div className="row">
                                     <div className="col-12 col-md-6">
-                                        <InputNoBorder label="Email Adress :" value={dataUser.email} />
+                                        <InputNoBorder disabled label="Email Adress :" value={dataUser.email} />
                                     </div>
                                     <div className="col-12 col-md-6">
                                         <InputNoBorder
@@ -382,7 +401,7 @@ function Profil() {
                                         ftWg="bold"
                                         mrgn="0.33vw 0"
                                         txClr="white"
-                                        value="Save Changes"
+                                        value={loadingUpddate ? "...loading" : "Save Changes"}
                                         wd="100%"
                                         onClick={handleSubmit}
                                     ></CustomButton>

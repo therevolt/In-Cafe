@@ -1,4 +1,4 @@
-import {Login, Profil, SignUp, Products, SearchProduct, ProductDetails, ForgotPassword, History, Homepage, AddProduct, UserVerify, Payment, ChangePassword, EditProduct} from '../../pages'
+import {Login, Profil, SignUp, Products, SearchProduct, ProductDetails, ForgotPassword, History, Homepage, AddProduct, UserVerify, Payment, ChangePassword, EditProduct, Chart} from '../../pages'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
@@ -29,6 +29,15 @@ function Routers() {
             })
         }
     },[])
+    useEffect(()=>{
+        if(localStorage.getItem("_products") !== null && localStorage.getItem("_total") !== null){
+            dispatch({
+                type:"SET_TO_CHART_PRODUCT", 
+                payload:JSON.parse(localStorage.getItem("_products")), 
+                total:localStorage.getItem("_total")
+            })
+        }
+    },[])
     return (
         <Router>
             <Switch>
@@ -41,6 +50,7 @@ function Routers() {
                 <Route path='/verify' component={UserVerify} />
                 <Route path='/reset' component={ChangePassword} />
                 <Route path='/Products' component={Products} />
+                <Route path='/cart' component={Chart} />
                 <Route path='/ProductDetails/:id' component={ProductDetails} />
                 <Route path='/admin/AddProduct' component={AddProduct} />
                 <Route path='/admin/EditProduct/:id' component={EditProduct} />
