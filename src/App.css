@@ -66,3 +66,27 @@
 
 .showInAnimation {animation: showOpacity 0.4s;}
 @keyframes showOpacity{from{opacity: 0;} to{opacity: 1;}}
+
+/* DESKTOP */
+@media(min-width: 768px) {
+  .yellowLogoRadiusClass { 
+    align-items: center; 
+    background: #FFBA33; 
+    border-radius: 50%; 
+    height: 3.3vw; 
+    justify-content: center; 
+    width: 3.3vw; 
+  }
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+  .yellowLogoRadiusClass { 
+    align-items: center; 
+    background: #FFBA33; 
+    border-radius: 50%; 
+    height: 10vw; 
+    justify-content: center; 
+    width: 10vw; 
+  }
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Heading5,BtnLg} from '../../components/atoms'
 import {Navbar} from '../../components/organisme'
 import {Footer} from '../../components/templates'
@@ -6,23 +6,38 @@ import {Footer} from '../../components/templates'
 import img_dummy from '../../assets/img_dummy_1.png'
 import axios from 'axios'
 import swal from 'sweetalert'
+import { useHistory } from 'react-router-dom'
+import { CustomButton } from '../../components/atoms'
 
 function Payment() {
+    const [productData, setProductData] = useState({})
+    const [paymentMethod, setPayment] = useState("")
+    const history = useHistory()
     const setupPayment = () => {
-        if(localStorage.getItem("transactionId") === null) {alert("Invalid payment")}
+        if(localStorage.getItem("transactionId") === null)  {swal("Error!", "Invalid payment bosku ~", "error") }
+        else if(paymentMethod === "") { swal("Payment?", "Pilih metode pembayarannya dulu dong ~", "warning") }
         else {
             const orderData = {
                 productId: localStorage.getItem("productId"),
                 transactionId: localStorage.getItem("transactionId"),
                 sizeProduct: localStorage.getItem("sizeProduct")
             }
+            axios.get(process.env.REACT_APP_SERVER + "/v1/trx/done/" + localStorage.getItem("transactionId"), { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
+            .then((res) => { console.log(res.data.data) })
+            .catch((err) => { console.log(err.response) })
             axios.post(process.env.REACT_APP_SERVER + "/v1/order", orderData, { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
             .then((res) => { 
                 console.log(res.data.data)
-                swal("Berhasil!", "Pesanan selesai, makanan kamu akan segera di proses ~", "success").then(() => {window.location = "/user/History"}) })
+                swal("Berhasil!", "Pesanan selesai, makanan kamu akan segera di proses ~", "success").then(() => {history.push("/user/History")}) })
             .catch((err) => { console.log(err.response) })
         }
     }
+    useEffect(() => {
+        axios.get(process.env.REACT_APP_SERVER + "/v1/product/" + localStorage.getItem("productId"))
+        .then((res) => { setProductData(res.data.data) })
+        .catch((err) => { console.log(err.response) })
+    }, [])
+    if(localStorage.getItem("token") === null) { swal("Belum login?", "Login dulu, yuk?", "warning").then(() => { history.push("/user/Login") }) }
     return (
         <div className="showInAnimation homepageDesktop">
             <Navbar />
@@ -38,7 +53,7 @@ function Payment() {
                             {/* card */}
                             <div className='bg-white rounded-md px-4 py-4'>
                                 <div className='my-5 text-center'>
-                                    <h3 className='font-weight-bold m-0 text-coklat'>Order Sumary</h3>
+                                    <h3 className='font-weight-bold m-0 text-coklat'>Order Summary</h3>
                                 </div>
                                 <div className="d-flex justify-content-between border-bottom py-2">
                                     <div className='align-self-center'>
@@ -62,7 +77,7 @@ function Payment() {
                                     value='TOTAL'
                                     />
                                     <Heading5
-                                    value='IDR 150.000'
+                                    value={"IDR " + productData.price * localStorage.getItem("howMuch")}
                                     />
                                 </div>
                             </div>
@@ -91,10 +106,73 @@ function Payment() {
                                         <h3 className='fw-700 text-white mb-3'>Payment Method</h3>
                                     </div>
                                     <div className='bg-white rounded-md px-4 py-4'>
-                                        <div className='border-bottom'>
-                                            {/* <div className="d-flex">
-                                                <input type="radio" />
-                                            </div> */}
+                                        <div className='displayRow' style={{alignItems: "center", justifyContent: "space-between"}}>
+                                            <img 
+                                                className="hoverThis hideThisInDesktop"
+                                                onClick={ () => { setPayment("BCA") } } 
+                                                src="https://user-images.githubusercontent.com/77045083/113516429-7977c680-95a4-11eb-922a-5d85393d2958.png"
+                                                style={
+                                                    paymentMethod === "BCA" ?
+                                                    {border: "0.1vw solid black", borderRadius: "1.5vw", height: "7vw", opacity: "0.5", width: "20vw"}
+                                                    :
+                                                    {border: "0.1vw solid black", borderRadius: "1.5vw", height: "7vw", width: "20vw"}
+                                                }
+                                            />
+                                            <img 
+                                                className="hoverThis hideThisInMobile"
+                                                onClick={ () => { setPayment("BCA") } } 
+                                                src="https://user-images.githubusercontent.com/77045083/113516429-7977c680-95a4-11eb-922a-5d85393d2958.png"
+                                                style={
+                                                    paymentMethod === "BCA" ?
+                                                    {border: "0.1vw solid black", borderRadius: "0.5vw", height: "2.3vw", opacity: "0.5", width: "6.9vw"}
+                                                    :
+                                                    {border: "0.1vw solid black", borderRadius: "0.5vw", height: "2.3vw", width: "6.9vw"}
+                                                }
+                                            />
+                                            <img 
+                                                className="hoverThis hideThisInDesktop"
+                                                onClick={ () => { setPayment("Dana") } } 
+                                                src="https://user-images.githubusercontent.com/77045083/113516431-7b418a00-95a4-11eb-9566-1c295678d300.png"
+                                                style={
+                                                    paymentMethod === "Dana" ?
+                                                    {border: "0.1vw solid black", borderRadius: "1.5vw", height: "7vw", opacity: "0.5", width: "20vw"}
+                                                    :
+                                                    {border: "0.1vw solid black", borderRadius: "1.5vw", height: "7vw", width: "20vw"}
+                                                }
+                                            />
+                                            <img 
+                                                className="hoverThis hideThisInMobile"
+                                                onClick={ () => { setPayment("Dana") } } 
+                                                src="https://user-images.githubusercontent.com/77045083/113516431-7b418a00-95a4-11eb-9566-1c295678d300.png"
+                                                style={
+                                                    paymentMethod === "Dana" ?
+                                                    {border: "0.1vw solid black", borderRadius: "0.5vw", height: "2.3vw", opacity: "0.5", width: "6.9vw"}
+                                                    :
+                                                    {border: "0.1vw solid black", borderRadius: "0.5vw", height: "2.3vw", width: "6.9vw"}
+                                                }
+                                            />
+                                            <img 
+                                                className="hoverThis hideThisInDesktop"
+                                                onClick={ () => { setPayment("OVO") } } 
+                                                src="https://user-images.githubusercontent.com/77045083/113516436-7d0b4d80-95a4-11eb-8bbe-d9430506398c.png"
+                                                style={
+                                                    paymentMethod === "OVO" ?
+                                                    {border: "0.1vw solid black", borderRadius: "1.5vw", height: "7vw", opacity: "0.5", width: "20vw"}
+                                                    :
+                                                    {border: "0.1vw solid black", borderRadius: "1.5vw", height: "7vw", width: "20vw"}
+                                                }
+                                            />
+                                            <img 
+                                                className="hoverThis hideThisInMobile"
+                                                onClick={ () => { setPayment("OVO") } } 
+                                                src="https://user-images.githubusercontent.com/77045083/113516436-7d0b4d80-95a4-11eb-8bbe-d9430506398c.png"
+                                                style={
+                                                    paymentMethod === "OVO" ?
+                                                    {border: "0.1vw solid black", borderRadius: "0.5vw", height: "2.3vw", opacity: "0.5", width: "6.9vw"}
+                                                    :
+                                                    {border: "0.1vw solid black", borderRadius: "0.5vw", height: "2.3vw", width: "6.9vw"}
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 </div>

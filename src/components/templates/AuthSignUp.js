@@ -51,11 +51,8 @@ function AuthSignUp() {
             }
         })
         .catch(err=>{
-            if(err.response.data.data.field == 'email'){
-                swal('Oops', 'Email tidak Boleh Kosong', 'error')
-            }else if(err.response.data.data.field == 'password'){
-                swal('Oops', 'password tidak Boleh Kosong', 'error')
-            }
+            if(err.response.data.message === "Email Already Registered!") { swal('Gagal!', err.response.data.message, 'error') }
+            else if(err.response.data.message === "Some Field Cannot Be Empty") { swal('Gagal!', err.response.data.message, 'error') }
         })
     }
     return (

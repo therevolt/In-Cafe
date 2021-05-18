@@ -1,4 +1,4 @@
-import { PeopleFavorite, StaffStoreCustomer, StartYourDayWithCoffee, VisitOurStoreOnTheMapBelow, WeProvideGoodCoffee } from '../organisme'
+import { CheckOurPromoToday, OurPartner, PeopleFavorite, StaffStoreCustomer, StartYourDayWithCoffee, VisitOurStoreOnTheMapBelow, WeProvideGoodCoffee } from '../organisme'
 
 export default function Homepage(){
    return(
@@ -8,6 +8,8 @@ export default function Homepage(){
          <WeProvideGoodCoffee/>
          <PeopleFavorite/>
          <VisitOurStoreOnTheMapBelow/>
+         <OurPartner/>
+         <CheckOurPromoToday/>
       </div>
    )
 }

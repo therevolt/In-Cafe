@@ -8,11 +8,9 @@ export default function StartYourDayWithCoffee(){
                <span className="noMargin startYourDayText">Start your day with</span>
                <span className="startYourDayText">Coffee and Good Meals</span>
                <div className="weProvideHighQualityBeans">
-                  <div className="noMargin">We provide high quality beans, good taste, and healthy</div>
-                  <div className="noMargin">meals made by love just for you. Start your day with us</div>
-                  <div>for a bigger smile!</div>
+                  <div className="noMargin">We provide high quality beans, good taste, and healthy meals made by love just for you. Start your day with us for a bigger smile!</div>
                </div>
-               <div style={{width: "45%"}}><BtnLg value="Get Started" color="btn-orange"/></div>
+               <div className="getStartedButton"><BtnLg value="Get Started" color="btn-orange"/></div>
             </div>
             <div className="withCoffeeRightSide">
                <form className="displayRow homeSearchBar">

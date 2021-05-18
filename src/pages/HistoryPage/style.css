@@ -18,9 +18,69 @@
       padding: 1vw;
       width: 99%;
    }
+   .ifHistoryIsNotFound {
+      align-items: center;
+      background: white;
+      border: 0.22vw dashed black;
+      border-radius: 1.5vw;
+      color: black;
+      font-size: 3vw;
+      height: 33vh;
+      justify-content: center;
+      margin: 10vw;
+      margin-top: 5vw;
+      opacity: 0.5;
+      width: 100%;
+   }
+   .historyProductImage {height: 5vw; margin: 0 1vw; width: 5vw;}
+   .historyProductName {font-size: 1.5vw;}
+   .historyProductInfo {font-size: 1.1vw;}
+   .historyFloatBtnGroup {margin-top: -5vw; margin-right: -2.5vw; width: 7vw;}
+   .historyProductDeleteBtn {height: 3.3vw; width: 3.3vw;}
+   .historyProductCloseBtn {font-size: 2vw;}
+   .letsSeeWhatYouBroughtText {font-size: 3vw;}
+   .longPressToDeleteText {font-size: 1.5vw;}
 }
 
 /* MOBILE */
 @media(max-width: 768px){
-   .historyPage {display: none;}
+   .historyPage {
+      align-items: center;
+      background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://user-images.githubusercontent.com/77045083/114286407-96226b80-9a88-11eb-891d-53affcc2a910.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: auto;
+      padding: 3vw;
+      width: auto;
+   }
+   .historyCard {
+      background: white;
+      border-radius: 3vw;
+      color: black;
+      margin: auto;
+      margin-bottom: 10vw;
+      padding: 5vw;
+   }
+   .ifHistoryIsNotFound {
+      align-items: center;
+      background: white;
+      border: 0.22vw dashed black;
+      border-radius: 1.5vw;
+      color: black;
+      font-size: 5.5vw;
+      height: 33vh;
+      justify-content: center;
+      margin: 10vw;
+      margin-top: 5vw;
+      opacity: 0.5;
+      width: 100%;
+   }
+   .historyProductImage {height: 22vw; margin: 0 10vw 0 5vw; width: 22vw;}
+   .historyProductName {font-size: 4vw;}
+   .historyProductInfo {font-size: 2.5vw;}
+   .historyFloatBtnGroup {margin-top: -20vw; margin-left: -15vw; width: 22vw;}
+   .historyProductDeleteBtn {height: 10vw; width: 10vw;}
+   .historyProductCloseBtn {font-size: 5vw;}
+   .letsSeeWhatYouBroughtText {font-size: 9vw; line-height: 1; margin: 7.7vw 0;}
+   .longPressToDeleteText {font-size: 4.5vw; margin-bottom: 15vw;}
 }

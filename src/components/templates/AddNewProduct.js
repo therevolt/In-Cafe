@@ -14,7 +14,7 @@ export default function AddNewProduct(){
    // USE EFFECT
    useEffect(() => {
       axios.get(process.env.REACT_APP_SERVER + "/v1/users", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-      .then((res) => { res.data.data.role === "admin" ? null : history.push("/Home") })
+      .then((res) => { return res.data.data.role === "admin" ? null : history.push("/Home") })
       .catch((err) => { console.log(err.response) })
       }, [])
    // UPLOAD IMAGE
@@ -75,7 +75,7 @@ export default function AddNewProduct(){
       else { createData.deliveryMethod.push(e.target.outerText) }
    }
    // ADD NEW FOOD
-   const createMovieSubmit = () => {
+   const createNewMenu = () => {
       const {
          name, 
          price, 
@@ -100,29 +100,28 @@ export default function AddNewProduct(){
       foodData.append("deliveryMethod", JSON.stringify(deliveryMethod))
       foodData.append("category", category)
       foodData.append("image", image)
-      console.log(createData)
       // POST DATA TO BACKEND (CREATE)
       axios.post(process.env.REACT_APP_SERVER + "/v1/product", foodData, {
          headers: { Authorization: 'Bearer ' + localStorage.getItem("token"), 'Content-Type': 'multipart/form-data' }
       })
       .then((res) => {
-         console.log(res.data)
          Swal.fire(
             "Berhasil!", 
             name + " berhasil di tambahkan ke dalam menu!", 
             "success")
-         .then(() => { history.push("/Products") })
+         .then(() => { history.push("/Products?page=1&limit=8") })
       })
       .catch((err) => { console.log(err.response) })
    }
-   console.log(createData)
    // RETURN
    return(
-      <div className="addNewProduct displayRow rubikFont" style={{justifyContent: "space-between", padding: "6vw"}}>
+      <div className="addNewProduct rubikFont" style={{justifyContent: "space-between", padding: "6vw"}}>
          <div className="displayColumn addProductLeft">
             <img src={newFoodImage} style={{borderRadius: "50%", margin: "auto", marginBottom: "2vw", width: "77%"}}/>
-            <CustomButton bgClr="black" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="0.5vw 0" txClr="white" value="Take a picture" wd="100%"/>
-            <CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="0.5vw 0" txClr="#6A4029" value="Choose from gallery" wd="100%" onClick={() => {uploadImage()}}/>
+            <div className="hideThisInDesktop" style={{marginTop: "7.7vw"}}><CustomButton bgClr="black" brRad="2.5vw" btnPdg="3vw 0" ftSize="4vw" ftWg="bold" mrgn="1vw 0" txClr="white" value="Take a picture" wd="100%"/></div>
+            <div className="hideThisInMobile"><CustomButton bgClr="black" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="0.5vw 0" txClr="white" value="Take a picture" wd="100%"/></div>
+            <div className="hideThisInDesktop" style={{marginBottom: "7.7vw"}}><CustomButton bgClr="#FFBA33" brRad="2.5vw" btnPdg="2.5vw 0" ftSize="4vw" ftWg="bold" mrgn="1vw 0" txClr="#6A4029" value="Choose from gallery" wd="100%" onClick={() => {uploadImage()}}/></div>
+            <div className="hideThisInMobile"><CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="0.5vw 0" txClr="#6A4029" value="Choose from gallery" wd="100%" onClick={() => {uploadImage()}}/></div>
             <input className="addNewProductInputNumber" min="1" max="24" name="startHour" type="number" required placeholder="Input start hour" style={{marginTop: "3vw"}} value={createData.startHour} onChange={(e) => { setCreateData({...createData, [e.target.name]: e.target.value}) }}/>
             <input className="addNewProductInputNumber" min="1" max="24" name="endHour" type="number" required placeholder="Input end hour" value={createData.endHour} onChange={(e) => { setCreateData({...createData, [e.target.name]: e.target.value}) }}/>
             <input className="addNewProductInputNumber" name="category" type="text" required placeholder="Input menu category" style={{marginTop: "3vw"}} onChange={(e) => { setCreateData({...createData, [e.target.name]: e.target.value}) }}/>
@@ -136,48 +135,122 @@ export default function AddNewProduct(){
             <div>Description :</div>
                <input className="newProductInputForm" name="description" placeholder="Type product description" required type="textarea" onChange={(e) => { setCreateData({...createData, [e.target.name]: e.target.value}) }}/>
             <div>Input product size :</div>
-            <div className="displayRow" style={{justifyContent: "space-between", margin:"1.5vw 0", width: "33%"}}>
+            <div className="displayRow chooseSizeAddProductArea" style={{justifyContent: "space-between"}}>
                <div className="hoverThis" onClick={(e) => { chooseSize("R"); pushSizeOrNot(e) }} style={sizeChosen === "R" ? {opacity: "0.5"} : null }><YellowLogo value="R"/></div>
                <div className="hoverThis" onClick={(e) => { chooseSize("L"); pushSizeOrNot(e) }} style={sizeChosen === "L" ? {opacity: "0.5"} : null }><YellowLogo value="L"/></div>
                <div className="hoverThis" onClick={(e) => { chooseSize("XL"); pushSizeOrNot(e) }} style={sizeChosen === "XL" ? {opacity: "0.5"} : null}><YellowLogo value="XL"/></div>
             </div>
             <div>Input delivery methods :</div>
-            <div className="displayRow" style={{justifyContent: "space-between", margin: "1.5vw 0", width: "55%"}}>
+            <div className="displayRow chooseDeliveryAddProductArea" style={{justifyContent: "space-between"}}>
                <div onClick={(e) => { chooseDelivery("Home Delivery"); pushDeliveryOrNot(e) }} value="Home Delivery">
-                  <CustomButton 
-                     bgClr={deliveryChosen === "Home Delivery" ? "#FFBA33" : "#F4F4F8"} 
-                     brdr={deliveryChosen === "Home Delivery" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
-                     brRad="0.5vw" 
-                     btnPdg="0.5vw 1.5vw" 
-                     ftSize="0.9vw" 
-                     ftWg={deliveryChosen === "Home Delivery" ? "bold" : "300"}
-                     txClr={deliveryChosen === "Home Delivery" ? "#6A4029" : "#9F9F9F"} 
-                     value="Home Delivery"/>
+                  <div className="hideThisInDesktop">
+                     <CustomButton 
+                        bgClr={deliveryChosen === "Home Delivery" ? "#FFBA33" : "#F4F4F8"} 
+                        brdr={deliveryChosen === "Home Delivery" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
+                        brRad="1.5vw" 
+                        btnPdg="1.5vw 4.5vw" 
+                        ftSize="2.5vw" 
+                        ftWg={deliveryChosen === "Home Delivery" ? "bold" : "300"}
+                        txClr={deliveryChosen === "Home Delivery" ? "#6A4029" : "#9F9F9F"} 
+                        value="Home Delivery"
+                     />
+                  </div>
+                  <div className="hideThisInMobile">
+                     <CustomButton 
+                        bgClr={deliveryChosen === "Home Delivery" ? "#FFBA33" : "#F4F4F8"} 
+                        brdr={deliveryChosen === "Home Delivery" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
+                        brRad="0.5vw" 
+                        btnPdg="0.5vw 1.5vw" 
+                        ftSize="0.9vw" 
+                        ftWg={deliveryChosen === "Home Delivery" ? "bold" : "300"}
+                        txClr={deliveryChosen === "Home Delivery" ? "#6A4029" : "#9F9F9F"} 
+                        value="Home Delivery"
+                     />
+                  </div>
                </div>
                <div onClick={(e) => { chooseDelivery("Dine In"); pushDeliveryOrNot(e) }} value="Dine In">
-                  <CustomButton 
-                     bgClr={deliveryChosen === "Dine In" ? "#FFBA33" : "#F4F4F8"} 
-                     brdr={deliveryChosen === "Dine In" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
-                     brRad="0.5vw" 
-                     btnPdg="0.5vw 1.5vw" 
-                     ftSize="0.9vw" 
-                     ftWg={deliveryChosen === "Dine In" ? "bold" : "300"}
-                     txClr={deliveryChosen === "Dine In" ? "#6A4029" : "#9F9F9F"} 
-                     value="Dine In"/>
+                  <div className="hideThisInDesktop">
+                     <CustomButton 
+                        bgClr={deliveryChosen === "Dine In" ? "#FFBA33" : "#F4F4F8"} 
+                        brdr={deliveryChosen === "Dine In" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
+                        brRad="1.5vw" 
+                        btnPdg="1.5vw 4.5vw" 
+                        ftSize="2.5vw"
+                        ftWg={deliveryChosen === "Dine In" ? "bold" : "300"}
+                        txClr={deliveryChosen === "Dine In" ? "#6A4029" : "#9F9F9F"} 
+                        value="Dine In"
+                     />
+                  </div>
+                  <div className="hideThisInMobile">
+                     <CustomButton 
+                        bgClr={deliveryChosen === "Dine In" ? "#FFBA33" : "#F4F4F8"} 
+                        brdr={deliveryChosen === "Dine In" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
+                        brRad="0.5vw" 
+                        btnPdg="0.5vw 1.5vw" 
+                        ftSize="0.9vw" 
+                        ftWg={deliveryChosen === "Dine In" ? "bold" : "300"}
+                        txClr={deliveryChosen === "Dine In" ? "#6A4029" : "#9F9F9F"} 
+                        value="Dine In"
+                     />
+                  </div>
                </div>
                <div onClick={(e) => { chooseDelivery("Take Away"); pushDeliveryOrNot(e) }} value="Take Away">
-                  <CustomButton 
-                     bgClr={deliveryChosen === "Take Away" ? "#FFBA33" : "#F4F4F8"} 
-                     brdr={deliveryChosen === "Take Away" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
-                     brRad="0.5vw" 
-                     btnPdg="0.5vw 1.5vw" 
-                     ftSize="0.9vw" 
-                     ftWg={deliveryChosen === "Take Away" ? "bold" : "300"}
-                     txClr={deliveryChosen === "Take Away" ? "#6A4029" : "#9F9F9F"} 
-                     value="Take Away"/>
+                  <div className="hideThisInDesktop">
+                     <CustomButton 
+                        bgClr={deliveryChosen === "Take Away" ? "#FFBA33" : "#F4F4F8"} 
+                        brdr={deliveryChosen === "Take Away" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
+                        brRad="1.5vw" 
+                        btnPdg="1.5vw 4.5vw" 
+                        ftSize="2.5vw"
+                        ftWg={deliveryChosen === "Take Away" ? "bold" : "300"}
+                        txClr={deliveryChosen === "Take Away" ? "#6A4029" : "#9F9F9F"} 
+                        value="Take Away"
+                     />
+                  </div>
+                  <div className="hideThisInMobile">
+                     <CustomButton 
+                        bgClr={deliveryChosen === "Take Away" ? "#FFBA33" : "#F4F4F8"} 
+                        brdr={deliveryChosen === "Take Away" ? "none" : "0.1vw solid rgba(186, 186, 186, 0.35)"} 
+                        brRad="0.5vw" 
+                        btnPdg="0.5vw 1.5vw" 
+                        ftSize="0.9vw" 
+                        ftWg={deliveryChosen === "Take Away" ? "bold" : "300"}
+                        txClr={deliveryChosen === "Take Away" ? "#6A4029" : "#9F9F9F"} 
+                        value="Take Away"
+                     />
+                  </div>
                </div>
             </div>
-            <CustomButton bgClr="#6A4029" brRad="1vw" btnPdg="1.5vw 0" ftSize="1.5vw" ftWg="bold" mrgn="5vw 0 0 0" txClr="white" type="submit" value="Save product" wd="100%" onClick={() => { createMovieSubmit() }}/>
+            <div className="hideThisInDesktop">
+               <CustomButton 
+                  bgClr="#6A4029" 
+                  brRad="2.5vw" 
+                  btnPdg="2.5vw 0" 
+                  ftSize="4vw" 
+                  ftWg="bold" 
+                  mrgn="5vw 0" 
+                  txClr="white" 
+                  type="submit" 
+                  value="Save product" 
+                  wd="100%" 
+                  onClick={() => { createNewMenu() }}
+               />
+            </div>
+            <div className="hideThisInMobile">
+               <CustomButton 
+                  bgClr="#6A4029" 
+                  brRad="1vw" 
+                  btnPdg="1.5vw 0" 
+                  ftSize="1.5vw" 
+                  ftWg="bold" 
+                  mrgn="5vw 0 0 0" 
+                  txClr="white" 
+                  type="submit" 
+                  value="Save product" 
+                  wd="100%" 
+                  onClick={() => { createNewMenu() }}
+               />
+            </div>
          </div>
       </div>
    )

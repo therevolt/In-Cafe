@@ -1,4 +1,6 @@
 import CardFly from './CardFly'
+import CheckOurPromoToday from './Home/CheckOurPromoToday'
+import OurPartner from './Home/OurPartner'
 import StartYourDayWithCoffee from './Home/StartYourDayWithCoffee'
 import StaffStoreCustomer from './Home/StaffStoreCustomer'
 import PeopleFavorite from './Home/PeopleFavorite'
@@ -7,4 +9,4 @@ import WeProvideGoodCoffee from './Home/WeProvideGoodCoffee'
 import Navbar from './Navbar'
 
 // EXPORTS
-export { CardFly, StartYourDayWithCoffee, StaffStoreCustomer, WeProvideGoodCoffee, PeopleFavorite, VisitOurStoreOnTheMapBelow, Navbar }
+export { CardFly, Navbar, StartYourDayWithCoffee, StaffStoreCustomer, WeProvideGoodCoffee, PeopleFavorite, VisitOurStoreOnTheMapBelow, OurPartner, CheckOurPromoToday }

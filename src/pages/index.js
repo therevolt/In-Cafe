@@ -10,5 +10,7 @@ import Payment from './Payment'
 import History from './HistoryPage'
 import ChangePassword from './ChangePassword'
 import AddProduct from './AddNewProduct'
+import EditProduct from './EditExistProduct'
+import SearchProduct from './SearchProduct'
 
-export {SignUp, Login, Profil, ForgotPassword, ProductDetails, Products, AddProduct, UserVerify, Homepage, Payment, History, ChangePassword}
+export {SignUp, Login, Profil, ForgotPassword, ProductDetails, Products, SearchProduct, AddProduct, EditProduct, UserVerify, Homepage, Payment, History, ChangePassword}
