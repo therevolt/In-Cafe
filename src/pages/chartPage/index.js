@@ -64,7 +64,7 @@ export default function Chart() {
                                 <div className="d-flex cartCard">
                                     <div className="align-self-center mr-4">
                                         <div className="rounded d-flex justify-content-center overflow-hidden imgContainerCart">
-                                            <img src={item.image} className="w-100 align-self-center" />
+                                            <img src={item.image} className="productExampleImgCart align-self-center" />
                                         </div>
                                     </div>
                                     <div className="align-self-center">

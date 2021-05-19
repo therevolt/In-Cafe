@@ -80,6 +80,7 @@
   .closeBtnCart { height: 1.5vw; width: 1.5vw; }
   .imgContainerCart { width: 120px; height: 120px; }
   .howMuchPriceCart { align-self: center; margin-left: auto; }
+  .productExampleImgCart {width: 100%;}
 }
 
 /* MOBILE */
@@ -101,4 +102,5 @@
   .deliveryMethodCart {display: none;}
   .itemDeliveryMethodCart {margin: auto; margin-left: 7.7vw; margin-bottom: 3.3vw;}
   .howMuchPriceCart {margin: 3.3vw 0; text-align: center;}
+  .productExampleImgCart {border-radius: 5vw; margin-top: 11vw; width: 50vw;}
 }
