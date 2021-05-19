@@ -21,19 +21,23 @@ export default function Chart() {
     }
     const createTransaction = () => {
         if(transaksi === null){
-            const data = {
-                totalPayment: total,
-                paymentMethod: "bank",
-                statusOrder: "Process",
-                deliveryMethod: "Home Delivery"
-            }
-            axios.post(process.env.REACT_APP_SERVER + "/v1/trx", data, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
-                .then((res) => {
-                    localStorage.setItem("_listOrder", JSON.stringify(products))
-                    localStorage.setItem("_IdTransaction", res.data.data.id)
-                    swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => { history.push("/user/Payment") })
-                })
-                .catch((err) => { console.log(err.response) })
+            products.map((item) => {
+                const data = {
+                    subTotal: parseInt(total),
+                    tax: 0,
+                    postageCost: 0,
+                    paymentMethod: "Bank",
+                    statusOrder: "Process",
+                    deliveryMethod: item.deliveryMethod
+                }
+                axios.post(process.env.REACT_APP_SERVER + "/v1/trx", data, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
+                    .then((res) => {
+                        localStorage.setItem("_listOrder", JSON.stringify(products))
+                        localStorage.setItem("_IdTransaction", res.data.data.id)
+                        swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => { history.push("/user/Payment") })
+                    })
+                    .catch((err) => { console.log(err.response) })
+            })
         }else{
             history.push("user/payment")
         }
@@ -57,18 +61,18 @@ export default function Chart() {
                         {products.map(item => {
                             const rupiah = formatRibuan(item.subTotal)
                             return <div className="rounded-sm shadow p-3 w-100 mb-3 position-relative">
-                                <div className="d-flex">
+                                <div className="d-flex cartCard">
                                     <div className="align-self-center mr-4">
-                                        <div className="rounded d-flex justify-content-center overflow-hidden" style={{ width: "120px", height: "120px" }}>
+                                        <div className="rounded d-flex justify-content-center overflow-hidden imgContainerCart">
                                             <img src={item.image} className="w-100 align-self-center" />
                                         </div>
                                     </div>
                                     <div className="align-self-center">
-                                        <h4>{item.name}</h4>
-                                        <div className="d-flex">
+                                        <h4 className="productNameCart">{item.name}</h4>
+                                        <div className="d-flex productInfoCart">
                                             <div className="mr-4">
-                                                <label className="mb-1 font-weight-bold" style={{ fontSize: "14px" }}>Delivery Method</label>
-                                                <div className="px-3 rounded py-1 text-white text-center" style={{ background: "#6A4029", fontSize: "12px" }}>{item.deliveryMethod}</div>
+                                                <label className="mb-1 deliveryMethodCart font-weight-bold" style={{ fontSize: "14px" }}>Delivery Method</label>
+                                                <div className="px-3 itemDeliveryMethodCart rounded py-1 text-white text-center" style={{ background: "#6A4029", fontSize: "12px" }}>{item.deliveryMethod}</div>
                                             </div>
                                             <div>
                                                 <div>
@@ -80,24 +84,23 @@ export default function Chart() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="align-self-center ml-auto">
+                                    <div className="howMuchPriceCart">
                                         <h5>Rp{rupiah}</h5>
                                     </div>
                                     {/* tombol remove */}
-                                    <div className={transaksi === null ? "" : "hide" }>
-                                        <div className="p-1 rounded-pill c-pointer text-white material-icons" style={{ position: "absolute", top: "20px", right: "20px", background: "black", fontSize: "16px" }}
-                                            onClick={() => {
-                                                const index = products.indexOf(item);
-                                                if (index > -1) {
-                                                    products.splice(index, 1);
-                                                    dispatch({ type: "SET_TO_CHART_PRODUCT", payload: products, total: total - item.subTotal })
-                                                    localStorage.setItem("_products", JSON.stringify(products))
-                                                    localStorage.setItem("_total", total - item.subTotal)
-                                                }
-                                            }}
-                                        >close</div>
-                                        {/*  */}
-                                    </div>
+                                    <img 
+                                        className="hoverThis closeBtnCart"
+                                        src={"https://www.freeiconspng.com/thumbs/close-button-png/black-circle-close-button-png-5.png"}
+                                        onClick={() => {
+                                            const index = products.indexOf(item);
+                                            if (index > -1) {
+                                                products.splice(index, 1);
+                                                dispatch({ type: "SET_TO_CHART_PRODUCT", payload: products, total: total - item.subTotal })
+                                                localStorage.setItem("_products", JSON.stringify(products))
+                                                localStorage.setItem("_total", total - item.subTotal)
+                                            }
+                                        }}
+                                    />
                                     {/* belum bayar */}
                                     <div className={transaksi !== null ? "" : "hide" }>
                                         <div style={{ position: "absolute", top: "20px", right: "20px"}}>

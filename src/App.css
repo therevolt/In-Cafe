@@ -77,6 +77,9 @@
     justify-content: center; 
     width: 3.3vw; 
   }
+  .closeBtnCart { height: 1.5vw; width: 1.5vw; }
+  .imgContainerCart { width: 120px; height: 120px; }
+  .howMuchPriceCart { align-self: center; margin-left: auto; }
 }
 
 /* MOBILE */
@@ -89,4 +92,13 @@
     justify-content: center; 
     width: 10vw; 
   }
+  .closeBtnCart {height: 8.8vw; right: 3.3vw; position: absolute; width: 8.8vw;}
+  .cartCard {flex-direction: column;}
+  .productNameCart {margin: 5.5vw 0; text-align: center;}
+  .productInfoCart {flex-direction: column; text-align: center;}
+  .deliveryMethodCart {display: flex; flex-direction: row;}
+  .imgContainerCart {margin-left: 5.5vw;}
+  .deliveryMethodCart {display: none;}
+  .itemDeliveryMethodCart {margin: auto; margin-left: 7.7vw; margin-bottom: 3.3vw;}
+  .howMuchPriceCart {margin: 3.3vw 0; text-align: center;}
 }

@@ -15,6 +15,7 @@ import Modal from 'react-modal'
 import style from './ModalConfig.module.css'
 function Profil() {
     const [toggleModal, setToggleModal] = React.useState(false);
+    const [updatedImage, setUpdateImage] = useState("https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif")
     const [pass, setPass] = useState({
         newPassword : '',
         confirmPassword : '',
@@ -52,6 +53,7 @@ function Profil() {
             birthday: data.birthday,
             gender: data.gender,
         });
+        setUpdateImage(data.avatar)
     }, [data]);
 
     const token = localStorage.getItem("token");
@@ -97,7 +99,7 @@ function Profil() {
                 type: "LOGIN_REQUEST",
                 payload: response.data.data,
             });
-            swal("Berhasil", response.data.message, "success");
+            swal("Berhasil", response.data.message, "success").then(() => { window.location = "/user/Profil" });
         });
     }
 
@@ -158,13 +160,18 @@ function Profil() {
                                     className="mb-3 px-5 position-relative mt-4 mx-auto"
                                     onClick={clickImg}
                                 >
-                                    <img src={dataUser.avatar} className="rounded-circle w-100" />
+                                    <img src={updatedImage} className="hoverThis rounded-circle w-100" />
                                 </div>
                                 <div className="my-2 d-none">
                                     <input
                                         type="file"
                                         className="form-control"
                                         onChange={(e) => {
+                                            const reader = new FileReader()
+                                            reader.addEventListener("load", () => {
+                                            setUpdateImage(reader.result)
+                                            })
+                                            reader.readAsDataURL(e.target.files[0])
                                             setDataUser({ ...dataUser, avatar: e.target.files[0] });
                                         }}
                                         ref={imgRef}

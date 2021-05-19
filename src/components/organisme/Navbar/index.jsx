@@ -30,6 +30,7 @@ const Navbar = ()=>{
       setKey(e.target.value)
    }
    const Search = (e) => {
+      e.preventDefault()
       if(key.length !== 0){
          dispatch({
             type : 'REQUEST_KEY',
@@ -48,9 +49,9 @@ const Navbar = ()=>{
                </div>
                <div className="hideThisInDesktop">
                   <div className={hamMenu === false ? "specialCaseForRightSideNav" : "displayRow navSearchAreaZoneOnly"} style={{alignItems: "center"}}>
-                     <div className='mx-3'>
+                     <form className='mx-3' onSubmit={Search}>
                         <input type="text" placeholder="search" className="rounded-xl py-2 px-4 searchInputBoxNavbar" style={{border:"none",background:"#EFEEEE", outline:"none"}} onChange={handleChangeKey} />
-                     </div>
+                     </form>
                      <Link className="hoverThis" onClick={Search}><img className="searchNavbarButton" src="https://user-images.githubusercontent.com/77045083/113756261-621f1180-973b-11eb-94b0-e6ee1be8b9e4.png"/></Link>
                      <Link className="hoverThis hideThisInMobile" style={{margin: "0 3vw"}}><img src="https://user-images.githubusercontent.com/77045083/113756264-62b7a800-973b-11eb-82f5-d57d95e6e664.png" style={{height: "1.5vw"}}/></Link>
                      <div className="hideFirst col-md-1 dropdown hideThisInMobile">
@@ -118,9 +119,9 @@ const Navbar = ()=>{
                   </div>
                   <div className="hideThisInMobile">
                      <div className={hamMenu === false ? "specialCaseForRightSideNav" : "displayRow navSearchAreaZoneOnly"} style={{alignItems: "center"}}>
-                        <div className='mx-3'>
+                        <form className='mx-3' onSubmit={Search}>
                            <input type="text" placeholder="search" className="rounded-xl py-2 px-4 searchInputBoxNavbar" style={{border:"none",background:"#EFEEEE", outline:"none"}} onChange={handleChangeKey} />
-                        </div>
+                        </form>
                         <Link className="hoverThis" onClick={Search}><img className="searchNavbarButton" src="https://user-images.githubusercontent.com/77045083/113756261-621f1180-973b-11eb-94b0-e6ee1be8b9e4.png"/></Link>
                         <Link className="hoverThis hideThisInMobile" style={{margin: "0 3vw"}}><img src="https://user-images.githubusercontent.com/77045083/113756264-62b7a800-973b-11eb-82f5-d57d95e6e664.png" style={{height: "1.5vw"}}/></Link>
                         <div className="hideFirst col-md-1 dropdown hideThisInMobile">

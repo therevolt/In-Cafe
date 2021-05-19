@@ -10,6 +10,17 @@ export default function HistoryPage(){
    const history = useHistory()
    const [transactionData, setTransactionData] = useState([])
    const [refreshTrigger, switchRefreshTrigger] = useState(false)
+   // format currency
+   const formatRibuan = (uang) => {
+      const sisa = uang.toString().length % 3
+      let rupiah = uang.toString().substr(0, sisa)
+      const ribuan = uang.toString().substr(sisa).match(/\d{3}/g);
+      if (ribuan) {
+         const separator = sisa ? '.' : '';
+         rupiah += separator + ribuan.join('.');
+      }
+      return rupiah
+   }
    const deleteHistory = (e) => {
       axios.delete(process.env.REACT_APP_SERVER + "/v1/order/" + e.target.getAttribute("orderId"), { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
       swal("Berhasil!", "Berhasil hapus histori pemesanan ~", "success")
@@ -49,7 +60,7 @@ export default function HistoryPage(){
                            <div className="historyProductName" style={{fontWeight: "bold"}}>{item.name}</div>
                            <div className="displayColumn historyProductInfo" style={{color: "#6A4029"}}>
                               <div className="displayRow" style={{justifyContent: "space-between", width: "100%"}}>
-                                 {"IDR " + item.totalPayment}
+                                 {"IDR " + formatRibuan(item.totalPayment)}
                                  <div className="historyHoverButtonShow">
                                     <div className="displayRow historyFloatBtnGroup" style={{justifyContent: "space-between"}}>
                                        <img className="hoverThis historyProductDeleteBtn" src={TrashDeleteButton} orderId={item.id} style={{borderRadius: "50%"}} onClick={(e) => { deleteHistory(e) }}/>
