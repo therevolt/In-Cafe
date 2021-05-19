@@ -1,0 +1,64 @@
+.thisIsPromoDescription {text-align: center;}
+
+/* DESKTOP */
+@media(min-width: 768px){
+  .ourProducts { display: flex; flex-direction: row; }
+  .ourProductsLeftSide {align-items: center; border-right: 0.1vw solid #DEDEDE; justify-content: center; width: 30vw;}
+  .ourProductsRightSide {padding: 0 7vw; width: 70vw;}
+  .promoForYouText {color: #6A4029; font-size: 1.5vw; font-weight: 600; padding: 1.5vw 0;}
+  .productCoupons {align-items: center;}
+  .yellowProductCoupons {background: #FFCB65; height: 70vh; position: relative; text-align: center; transition-duration: 0.5s; z-index: 2;}
+  .yellowProductCoupons:hover {background: #ffde9b; cursor: pointer;}
+  .yellowTopCoupons {border-bottom: 0.15vw dashed black; padding: 2vw;}
+  .yellowBottomCoupons {padding: 2vw 0;}
+  .blackProductCoupons {background: black; height: 60vh; left: 8%; position: absolute; width: 10vw; z-index: 1;}
+  .brownProductCoupons {background: #6A4029; height: 50vh; left: 9.5%; position: absolute; width: 10vw; z-index: 0;}
+  .yellowProductCoupons, .blackProductCoupons, .brownProductCoupons {border-radius: 1.5vw; width: 17vw;}
+  .foodCouponTitle {font-size: 1.3vw; font-weight: bold;}
+  .foodCouponDescription {font-size: 0.77vw;}
+  .foodCouponFoodImg {border-radius: 50%; height: 8vw; margin-bottom: 1vw;}
+  .foodCouponCodeText {font-size: 1vw;}
+  .foodCouponCode {font-size: 2vw; font-weight: bold;}
+  .foodCouponCodeValid {font-size: 0.7vw;}
+  .couponsWillBeUpdatedText, .checkThemOutText, .couponsTermsAndCondition {font-size: 0.8vw;}
+  .couponsTermsAndCondition {margin: 5vw 0;}
+  .productCategory {justify-content: space-between; width: 100%;}
+  .productCategoryBtn {color: #9F9F9F; font-size: 1.2vw; padding-top: 2vw; padding-bottom: 1vw;}
+  .productCategoryBtn:hover {color: #6A4029; text-decoration: none;}
+  .productsImageDisplaySize {height: 8vw; top: -3vw; width: 8vw;}
+  .productFoodName {font-size: 1.3vw; font-weight: bold; margin-top: 5vw;}
+  .productFoodPrice {color: #6A4029; font-size: 1vw; font-weight: bold; margin: 1vw 0;}
+  .foodProductBorder {align-items: center; border-radius: 2.2vw; box-shadow: 0 1.5vw 3vw rgba(57, 57, 57, 0.1); height: 15vw; margin: 0 1vw; padding: 1vw; width: 10vw;}
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+  .ourProductsLeftSide {align-items: center; border-right: 0.1vw solid #DEDEDE; justify-content: center; }
+  .ourProductsRightSide {border-top: 0.1vw solid #DEDEDE; padding: 0 10vw; padding-top: 2.5vw;}
+  .promoForYouText {color: #6A4029; font-size: 5.5vw; font-weight: 600; padding-top: 10vw;}
+  .thisIsPromoDescription {margin: 5vw 0;}
+  .productCoupons {align-items: center;}
+  .yellowProductCoupons {background: #FFCB65; height: 70vh; left: -7.7%; position: relative; text-align: center; transition-duration: 0.5s; z-index: 2;}
+  .yellowProductCoupons:hover {background: #ffde9b; cursor: pointer;}
+  .yellowTopCoupons {border-bottom: 0.15vw dashed black; padding: 5vw;}
+  .yellowBottomCoupons {padding: 5vw 0;}
+  .blackProductCoupons {background: black; height: 60vh; left: 25%; position: absolute; z-index: 1;}
+  .brownProductCoupons {background: #6A4029; height: 50vh; left: 30%; position: absolute; z-index: 0;}
+  .yellowProductCoupons, .blackProductCoupons, .brownProductCoupons {border-radius: 5vw; width: 55vw;}
+  .foodCouponTitle {font-size: 5vw; font-weight: bold;}
+  .foodCouponDescription {font-size: 3vw;}
+  .foodCouponFoodImg {border-radius: 50%; height: 25vw; margin: 5vw 0;}
+  .foodCouponCodeText {font-size: 4vw;}
+  .foodCouponCode {font-size: 5.5vw; font-weight: bold;}
+  .foodCouponCodeValid {font-size: 2.5vw;}
+  .couponsWillBeUpdatedText, .checkThemOutText, .couponsTermsAndCondition {font-size: 2.5vw;}
+  .couponsTermsAndCondition {margin: 5vw 0;}
+  .productCategory {justify-content: space-between; width: 100%;}
+  .productCategoryBtn {color: #9F9F9F; font-size: 2.5vw; padding-top: 2vw; padding-bottom: 1vw;}
+  .productCategoryBtn:hover {color: #6A4029; text-decoration: none;}
+  .productsLoadingProcessImg {height: 33vw; margin-top: 5vw;}
+  .productsImageDisplaySize {height: 25vw; margin-top: -11vw; width: 25vw;}
+  .productFoodName {font-size: 4vw; font-weight: bold; margin-top: 18vw;}
+  .productFoodPrice {color: #6A4029; font-size: 3vw; font-weight: bold; margin: 1vw 0;}
+  .foodProductBorder {align-items: center; border-radius: 5vw; box-shadow: 0 1.5vw 3vw rgba(57, 57, 57, 0.1); height: 44vw; margin: 15vw 1vw 5.5vw 1vw; padding: 1vw; width: 33vw;}
+}

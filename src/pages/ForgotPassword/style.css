@@ -1,0 +1,29 @@
+/* DESKTOP */
+@media (min-width: 768px){
+   .forgotPasswordMobile {display: none;}
+   .forgotPassword {
+      align-items: center;
+      background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://user-images.githubusercontent.com/77045083/113736112-077bba80-9727-11eb-80c8-6b9af4fe9082.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+      height: 100vh;
+      padding: 3vw;
+      width: auto;
+   }
+   .forgotPasswordBigText {font-size: 4vw; font-weight: 700;}
+   .forgotPasswordSmallText {font-size: 1.5vw; font-weight: 400;}
+   .forgotPasswordInput {align-items: center; justify-content: space-between; margin: 5vw 0; width: 50%;}
+   .forgotPasswordResendLink {text-align: center;}
+}
+
+
+/* MOBILE */
+@media (max-width: 768px){
+   .forgotPasswordDesktop, .forgotPasswordFooter {display: none;}
+   .forgotPasswordMobile {background: #F2F2F2; height: auto; padding: 60px 30px; text-align: center;}
+   .dontWorryText {font-size: 55px; font-weight: 600; line-height: 55px;}
+   .getPasswordLinkText {font-size: 14px;}
+   .inputForgotPassword {background: #F2F2F2; border: none; border-bottom: 1px solid #9F9F9F; padding: 12px 0; width: 90%;}
+   .inputForgotPassword:focus {outline: none;}
+}
