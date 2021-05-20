@@ -35,6 +35,7 @@ export default function ChangePassword(){
                 swal('Oops', err.response.data.message, 'error')
             }
         })
+        console.log(password);
     }
     return(
         <div className="showInAnimation poppinsFont">

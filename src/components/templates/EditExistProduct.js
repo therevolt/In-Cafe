@@ -113,18 +113,18 @@ export default function EditExistProduct() {
    }
    // RETURN RESULT
    return(
-      <div className="displayRow showInAnimation" style={{padding: "6vw"}}>
+      <div className="showInAnimation editProductPageTemplate">
          <div className="editProductLeft">
             <div className="editFoodImage">
-               <img className="hoverThis" onClick={() => { uploadEditImage() }} src={editFoodImg === "" ? "https://getstamped.co.uk/wp-content/uploads/WebsiteAssets/Placeholder.jpg" : editFoodImg} style={{borderRadius: "3vw", width: "37vw", height: "37vw"}}/>
-               <div className="hoverThis editDelImgBtn" onClick={() => {setEditImg("")}}><YellowLogo img={TrashBin} imgHeight="1.5vw" imgWidth="1.5vw"/></div>
+               <img className="hoverThis editProductImageDisplayAndEdit" onClick={() => { uploadEditImage() }} src={editFoodImg === "" ? "https://getstamped.co.uk/wp-content/uploads/WebsiteAssets/Placeholder.jpg" : editFoodImg}/>
+               <div className="hoverThis editDelImgBtn" onClick={() => {setEditImg("")}}><YellowLogo cls="editProductDeleteImageButton" img={TrashBin}/></div>
             </div>
          </div>
          <div className="displayColumn editProductRight poppinsFont">
-            <input className="editProductInput" onChange={(e) => { changeEditValue(e) }} name="name" placeholder="Menu name" style={{borderBottom: "0.1vw solid #9F9F9F", fontSize: "4vw", fontWeight: "900", width: "100%"}} type="text" value={editFoodData.name}/>
-            <div style={{fontSize: "2.5vw"}}>IDR <input className="editProductInput" onChange={(e) => { changeEditValue(e) }} name="price" placeholder="Menu price" type="number" value={editFoodData.price}/></div>
-            <textarea className="editProductInput" onChange={(e) => { changeEditValue(e) }} name="description" placeholder="Menu description" style={{fontSize: "1.5vw", margin: "2.5vw 0", width: "100%"}} type="textarea" value={editFoodData.description}/>
-            <div className="displayRow" style={{justifyContent: "space-between"}}>
+            <input className="editProductInput editProductInputName" onChange={(e) => { changeEditValue(e) }} name="name" placeholder="Menu name" style={{borderBottom: "0.1vw solid #9F9F9F", fontWeight: "900", width: "100%"}} type="text" value={editFoodData.name}/>
+            <div className="editProductInputPrice">IDR <input className="editProductInput" onChange={(e) => { changeEditValue(e) }} name="price" placeholder="Menu price" type="number" value={editFoodData.price}/></div>
+            <textarea className="editProductInput editProductInputDescription" onChange={(e) => { changeEditValue(e) }} name="description" placeholder="Menu description" type="textarea" value={editFoodData.description}/>
+            <div className="editProductDeliveryInputAreaZone" style={{justifyContent: "space-between"}}>
                <input className="editProductSizeDeliveryInput" onChange={(e) => { changeEditArray(e) }} name="size" placeholder="Menu sizes" value={editFoodData.size}/>
                <input className="editProductSizeDeliveryInput" onChange={(e) => { changeEditArray(e) }} name="deliveryMethod" placeholder="Menu delivery methods" value={editFoodData.deliveryMethod}/>
             </div>
@@ -144,7 +144,8 @@ export default function EditExistProduct() {
                   +
                   </div>
                </div>
-               <CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1vw" ftSize="1vw" ftWg="bold" onClick={() => { updateOldMenu() }} txClr="#6A4029" value="Save change" wd="11vw"/>
+               <div className="hideThisInDesktop"><CustomButton bgClr="#FFBA33" brRad="2.5vw" btnPdg="2.5vw" ftSize="4vw" ftWg="bold" onClick={() => { updateOldMenu() }} txClr="#6A4029" value="Save change" wd="50vw"/></div>
+               <div className="hideThisInMobile"><CustomButton bgClr="#FFBA33" brRad="1vw" btnPdg="1vw" ftSize="1vw" ftWg="bold" onClick={() => { updateOldMenu() }} txClr="#6A4029" value="Save change" wd="11vw"/></div>
             </div>
          </div>
       </div>

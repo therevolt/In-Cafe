@@ -14,14 +14,32 @@ input[type=number] {
 
 /* DESKTOP */
 @media(min-width: 768px){
+   .editProductPageTemplate { display: flex; flex-direction: row; padding: 6vw; }
    .editProductLeft, .editProductRight { width: 50%; }
    .editDelImgBtn { margin-top: -35%; margin-left: 32%; position: absolute; z-index: 1; }
+   .editProductDeleteImageButton { height: 1.5vw; width: 1.5vw; }
+   .editProductImageDisplayAndEdit {border-radius: 3vw; width: 37vw; height: 37vw;}
    .editProductInput { padding: 1vw 0; }
+   .editProductInputName { font-size: 4vw; }
+   .editProductInputPrice { font-size: 2.5vw; }
+   .editProductInputDescription { font-size: 1.5vw; margin: 2.5vw 0; }
+   .editProductDeliveryInputAreaZone { display: flex; flex-direction: row; }
    .editProductSizeDeliveryInput { border: 0.1vw solid #9F9F9F; border-radius: 1vw; font-size: 1vw; padding: 1.5vw; width: 48%; }
    .plusMinusEditProduct { background: transparent; cursor: pointer; padding: 1vw; }
 }
 
 /* MOBILE */
 @media(max-width: 768px){
-   .editProductDesktop {display: none;}
+   .editProductPageTemplate { display: flex; flex-direction: column; padding: 10vw; }
+   .editProductLeft, .editProductRight { margin: auto; }
+   .editDelImgBtn { margin-top: -72%; margin-left: 63%; position: absolute; z-index: 1; }
+   .editProductDeleteImageButton { height: 5vw; width: 5vw; }
+   .editProductImageDisplayAndEdit {border-radius: 3vw; width: 77vw; height: 77vw;}
+   .editProductInput { padding: 1vw 0; }
+   .editProductInputName { font-size: 7.7vw; margin-top: 5vw; }
+   .editProductInputPrice { font-size: 5.5vw; }
+   .editProductInputDescription { font-size: 4.4vw; margin: 7.7vw 0; }
+   .editProductDeliveryInputAreaZone { display: flex; flex-direction: column; }
+   .editProductSizeDeliveryInput { border: 0.1vw solid #9F9F9F; border-radius: 2.5vw; font-size: 5vw; margin: 1.77vw 0; padding: 2.5vw 5vw; }
+   .plusMinusEditProduct { background: transparent; cursor: pointer; padding: 1vw; }
 }
