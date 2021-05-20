@@ -49,7 +49,7 @@ export default function ForgotPassword(){
                         <CustomButton bgClr="#FFBA33" txClr="#6A4029" brRad="0.5vw" btnPdg="1vw 3vw" ftSize="1.1vw" ftWg="600" mrgn="0.5vw 0 0 1vw" value="Send"/>
                     </form>
                     <div className="forgotPasswordResendLink" style={resendEmail === false ? {visibility: "hidden"} : null}>
-                        <p style={{color: "white", fontSize: "1.5vw", opacity: "0.5", textAlign: "center"}}>Still not receiving any email from us? <br/> How about we resend you another email?</p>
+                        <p style={{color: "white", fontSize: "1.5vw", opacity: "0.5", textAlign: "center"}}>Still not receiving any mail from us? <br/> How about we'll resend you another new mail?</p>
                         <CustomButton bgClr="#6A4029" txClr="white" brRad="0.5vw" btnPdg="1.5vw 9vw" ftSize="1.1vw" ftWg="600" mrgn="1vw 0" onClick={ (e) => { handleSubmit(e) }} value="Resend Link"/>
                     </div>
                 </div>
