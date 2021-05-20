@@ -1,10 +1,6 @@
 import './style.css'
 import React, { useEffect, useState } from 'react'
-<<<<<<< HEAD
-import {useDispatch} from 'react-redux'
-=======
 import {useDispatch, useSelector} from 'react-redux'
->>>>>>> 7cf0668ab8c550fdfddd5f629fb88cff0cf23483
 import { Link, useHistory } from 'react-router-dom'
 import CoffeeLogo from '../../atoms/CoffeeLogo'
 import {BtnLg, CustomButton} from '../../atoms/'

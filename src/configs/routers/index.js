@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import {Login, Profil, SignUp, Products, SearchProduct, ProductDetails, ForgotPassword, History, Homepage, AddProduct, UserVerify, Payment, ChangePassword, EditProduct} from '../../pages'
-=======
 import {Login, Profil, SignUp, Products, SearchProduct, ProductDetails, ForgotPassword, History, Homepage, AddProduct, UserVerify, Payment, ChangePassword, EditProduct, Chart} from '../../pages'
->>>>>>> 7cf0668ab8c550fdfddd5f629fb88cff0cf23483
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
