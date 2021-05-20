@@ -5,8 +5,9 @@ import { Link, useHistory } from 'react-router-dom'
 import axios from "axios"
 import swal from "sweetalert"
 export default function Chart() {
-    const transaksi = localStorage.getItem("_IdTransaction")
+    const transaksi = localStorage.getItem("_IdTransaction0")
     const history = useHistory()
+    const [_idTransactions, setIdTransactions] = useState([])
     const dispatch = useDispatch()
     const { products, total } = useSelector(state => state.chart)
     const formatRibuan = (uang) => {
@@ -21,9 +22,9 @@ export default function Chart() {
     }
     const createTransaction = () => {
         if(transaksi === null){
-            products.map((item) => {
+            products.map((item, index) => {
                 const data = {
-                    subTotal: parseInt(total),
+                    subTotal: item.subTotal,
                     tax: 0,
                     postageCost: 0,
                     paymentMethod: "Bank",
@@ -33,11 +34,11 @@ export default function Chart() {
                 axios.post(process.env.REACT_APP_SERVER + "/v1/trx", data, { headers: { Authorization: "Bearer " + localStorage.getItem("token") } })
                     .then((res) => {
                         localStorage.setItem("_listOrder", JSON.stringify(products))
-                        localStorage.setItem("_IdTransaction", res.data.data.id)
-                        swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => { history.push("/user/Payment") })
+                        localStorage.setItem(`_IdTransaction${index}`, res.data.data.id)
                     })
                     .catch((err) => { console.log(err.response) })
             })
+            swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => { history.push("/user/Payment") })
         }else{
             history.push("user/payment")
         }
@@ -89,7 +90,7 @@ export default function Chart() {
                                     </div>
                                     {/* tombol remove */}
                                     <img 
-                                        className="hoverThis closeBtnCart"
+                                        className={transaksi === null ? "hoverThis closeBtnCart" : "hide"}
                                         src={"https://www.freeiconspng.com/thumbs/close-button-png/black-circle-close-button-png-5.png"}
                                         onClick={() => {
                                             const index = products.indexOf(item);

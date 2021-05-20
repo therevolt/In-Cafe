@@ -30,7 +30,9 @@ export default function HistoryPage(){
       if(localStorage.getItem("token") === null) { swal("Belum login?", "Login dulu, yuk?", "warning").then(() => { history.push("/user/Login") }) }
       else{
          axios.get(process.env.REACT_APP_SERVER + "/v1/order", { headers: {Authorization: "Bearer " + localStorage.getItem("token")} })
-         .then((res) => { setTransactionData(res.data.data) })
+         .then((res) => { 
+            setTransactionData(res.data.data) 
+            console.log(res.data.data) })
          .catch((err) => { Swal.fire("Oops!", err.response.data.message, "error") })
       }
    }, [])

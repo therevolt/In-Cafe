@@ -11,7 +11,7 @@ import { CustomButton } from '../../components/atoms'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Payment() {
-    const transaction = localStorage.getItem("_IdTransaction")
+    const transaction = localStorage.getItem("_IdTransaction0")
     const dispatch = useDispatch()
     const { data } = useSelector((state) => state.user);
     const [productData, setProductData] = useState({})
@@ -20,26 +20,23 @@ function Payment() {
     const setupPayment = () => {
         if (paymentMethod === "") { swal("Payment?", "Pilih metode pembayarannya dulu dong ~", "warning") }
         else {
-            const _idTransaksi = localStorage.getItem("_IdTransaction")
-            const listPayment = JSON.parse(localStorage.getItem("_listOrder")).map(item => {
-                return {
+            const listOrder = JSON.parse(localStorage.getItem("_listOrder"))
+            listOrder.map((item, index) => {
+                axios.post(process.env.REACT_APP_SERVER + "/v1/order", {
                     productId: item.id_product,
-                    transactionId: _idTransaksi,
+                    transactionId: localStorage.getItem(`_IdTransaction${index}`),
                     sizeProduct: item.sizeProduct
-                }
+                }, { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
+                    .then((res) => {
+                        localStorage.removeItem(`_IdTransaction${index}`)
+                    })
+                    .catch((err) => { console.log(err.response) })
             })
-            axios.get(process.env.REACT_APP_SERVER + "/v1/trx/done/" + localStorage.getItem("transactionId"), { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
-                .then((res) => { console.log(res.data.data) })
-                .catch((err) => { console.log(err.response) })
-            axios.post(process.env.REACT_APP_SERVER + "/v1/order", listPayment, { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
-                .then((res) => {
-                    dispatch({ type: "RESET_CART" })
-                    localStorage.removeItem("_IdTransaction")
-                    localStorage.removeItem("_products")
-                    localStorage.removeItem("_total")
-                    swal("Berhasil!", "Pesanan selesai, makanan kamu akan segera di proses ~", "success").then(() => { history.push("/user/History") })
-                })
-                .catch((err) => { console.log(err.response) })
+            dispatch({ type: "RESET_CART" })
+            localStorage.removeItem("_products")
+            localStorage.removeItem("_listOrder")
+            localStorage.removeItem("_total")
+            swal("Berhasil!", "Pesanan selesai, makanan kamu akan segera di proses ~", "success").then(() => { history.push("/user/History") })
         }
     }
     useEffect(() => {
