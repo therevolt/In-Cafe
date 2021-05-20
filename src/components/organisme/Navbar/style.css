@@ -1,0 +1,41 @@
+.navBtn:hover {text-decoration: none;}
+.navbarReusable {background: white; position: sticky; top: 0; z-index: 10;}
+
+/* DESKTOP */
+@media (min-width: 768px){
+    .navbarReusable {
+        border-bottom: 0.1vw solid #DEDEDE;
+        justify-content: space-between;
+        padding: 1.5vw 6vw;
+        width: 100%;
+    }
+    .navBtn {color: black; font-size: 1vw; padding: 0 1.5vw;}
+    .navbarDesktop {align-items: center; display: flex; flex-direction: row; justify-content: space-between; width: 100%;}
+    .navbarMobile {display: none;}
+    .dropdownUser {
+        border-radius: 1vw !important;
+        left: 50% !important;
+        right: auto !important;
+        text-align: center !important;
+        transform: translate(-15vw, 3vw) !important;
+     }
+     .userDropdownMenu:hover {background: white !important;}
+   .userDropdownWrapper {padding: 1vw 3vw; width: 20vw;}
+   .userDropdownArea, .userBtnArea {display: flex; flex-direction: row; width: 100%;}
+   .userDropdownArea {margin-bottom: 10%;}
+   .userBtnArea {align-items: center; justify-content: space-between; margin-top: 5%;}
+   .userUpdateBtn, .userRedBtn, .addOrUpdateMovies {border-radius: 0.5vw; font-size: 0.8vw; font-weight: 600; letter-spacing: 0.75px; padding: 0.5vw 1vw; width: 47%;}
+   .userUpdateBtn {background: #3CB371; color: white;}
+   .userUpdateBtn:hover {color:white; opacity: 0.5;}
+   .userProfileImage {border-radius: 50%; height: 5vw; width: 5vw;}
+   .userProfileNameAndTitle {padding: 1vw; padding-right: 0; text-align: left; width: 66%;}
+   .userProfileName, .userProfileTitle {float: left; margin: 0;}
+   .userProfileName {font-size: 1vw; font-weight: 600;}
+   .userProfileTitle {color: #6E7191; font-size: 0.8vw;}
+   .imgNavbar {border-radius: 50%; height: 2.5vw; margin: auto; width: 2.5vw;}
+   .imgNavbar:hover {cursor: pointer;}
+   .hoverThis:hover {opacity: 0.5;}
+}
+
+/* MOBILE */
+@media (max-width: 768px) {.navbarDesktop {display: none;}}

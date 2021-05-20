@@ -1,0 +1,68 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.displayRow {
+  display: flex;
+  flex-direction: row;
+}
+.displayColumn {
+  display: flex;
+  flex-direction: column;
+}
+.hoverThis:hover {cursor: pointer; opacity: 0.5;}
+.noMargin {margin: 0 !important;}
+
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+.rubikFont {font-family: 'Rubik'}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+.poppinsFont {font-family: 'Poppins'}
+
+/* MAP BUTTON - CENTERIZE */
+.dropdownMenuCenter {
+  left: 50% !important;
+  right: auto !important;
+  text-align: center !important;
+  transform: translate(-50%, -111%) !important;
+  z-index: 1 !important;
+}
+.justifyContentCenter {justify-content: center}
+
+.showInAnimation {animation: showOpacity 0.4s;}
+@keyframes showOpacity{from{opacity: 0;} to{opacity: 1;}}

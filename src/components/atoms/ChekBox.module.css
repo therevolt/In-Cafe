@@ -1,0 +1,12 @@
+.size{
+    width: 30px;
+    height: 30px;
+    border:5px solid #6A4029;
+    content: '';
+}
+.visibilityHide{
+    opacity: 0;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}

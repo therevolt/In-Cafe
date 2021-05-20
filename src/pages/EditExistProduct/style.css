@@ -1,0 +1,27 @@
+.editProductInput {border: none;}
+.editProductInput:focus {outline: none;}
+.plusMinusEditProduct:hover {background: #F5F5F5;}
+
+/* NO ARROW NUMBER INPUT */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* DESKTOP */
+@media(min-width: 768px){
+   .editProductLeft, .editProductRight { width: 50%; }
+   .editDelImgBtn { margin-top: -35%; margin-left: 32%; position: absolute; z-index: 1; }
+   .editProductInput { padding: 1vw 0; }
+   .editProductSizeDeliveryInput { border: 0.1vw solid #9F9F9F; border-radius: 1vw; font-size: 1vw; padding: 1.5vw; width: 48%; }
+   .plusMinusEditProduct { background: transparent; cursor: pointer; padding: 1vw; }
+}
+
+/* MOBILE */
+@media(max-width: 768px){
+   .editProductDesktop {display: none;}
+}
