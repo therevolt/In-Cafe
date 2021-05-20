@@ -11,7 +11,12 @@ import { CustomButton } from '../../components/atoms'
 import { useSelector, useDispatch } from 'react-redux'
 
 function Payment() {
-    const transaction = localStorage.getItem("_IdTransaction0")
+    const [transactions, setTransaction] = useState("")
+    useEffect(()=>{
+        const transaction = localStorage.getItem("_IdTransaction0")
+        setTransaction(transaction)
+    },[])
+    
     const dispatch = useDispatch()
     const { data } = useSelector((state) => state.user);
     const [productData, setProductData] = useState({})
@@ -55,7 +60,7 @@ function Payment() {
         }
         return rupiah
     }
-    if (transaction !== null) {
+    if (transactions !== null) {
         return (
             <div className="showInAnimation homepageDesktop">
                 <Navbar />

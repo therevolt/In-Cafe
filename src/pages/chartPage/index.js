@@ -35,10 +35,10 @@ export default function Chart() {
                     .then((res) => {
                         localStorage.setItem("_listOrder", JSON.stringify(products))
                         localStorage.setItem(`_IdTransaction${index}`, res.data.data.id)
+                        swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => { history.push("/user/Payment") })
                     })
                     .catch((err) => { console.log(err.response) })
             })
-            swal("Success", "Berhasil membuat transaksi baru, silahkan lanjut ke pembayaran!", "success").then(() => { history.push("/user/Payment") })
         }else{
             history.push("user/payment")
         }
