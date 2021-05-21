@@ -28,14 +28,12 @@ npm install
 - Type ``` npm start ``` To Start The Project
 
 ## Preview Design
-<p align="center">
   <span>
-	  <img height="430" width="400" src="https://user-images.githubusercontent.com/77045083/116245936-b2661e00-a793-11eb-84ca-1401ade1bec4.png">
-	  <img height="430" width="400" src="https://user-images.githubusercontent.com/77045083/116245971-bb56ef80-a793-11eb-9b90-56ce9a273465.png">
-	  <img height="430" width="400" src="https://user-images.githubusercontent.com/77045083/116245953-b6923b80-a793-11eb-9c32-c111584b7fd3.png">
-	  <img  height="430" width="400" src="https://user-images.githubusercontent.com/77045083/116245993-bf830d00-a793-11eb-8131-338bb7aa8f9d.png">
+	  <img width="415" src="https://user-images.githubusercontent.com/77045083/116245936-b2661e00-a793-11eb-84ca-1401ade1bec4.png">
+	  <img width="415" height="254" src="https://user-images.githubusercontent.com/77045083/116245971-bb56ef80-a793-11eb-9b90-56ce9a273465.png">
+	  <img width="415" height="277" src="https://user-images.githubusercontent.com/77045083/116245953-b6923b80-a793-11eb-9c32-c111584b7fd3.png">
+	  <img width="415" src="https://user-images.githubusercontent.com/77045083/116245993-bf830d00-a793-11eb-8131-338bb7aa8f9d.png">
   </span>
-</p>
 
 ## Live Demo
 ### In Cafe - Netlify Links :  
