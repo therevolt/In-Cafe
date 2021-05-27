@@ -7,10 +7,6 @@
 [![made-with-VSCode](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg)](https://code.visualstudio.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3e5e5f0e-297c-4bbe-85d7-12793c76f338/deploy-status)](https://incafe.netlify.app/)   
 </div>
-
-# ReactJS - In Cafe
-    Erwin Saputra Sulistio - Fullstack Web 8, 
-    Team Project - Week 8.
     
 ## How To Install?
 - Clone This Repo
@@ -29,10 +25,14 @@ npm install
 
 ## Preview Design
   <span>
-	  <img width="415" src="https://user-images.githubusercontent.com/77045083/116245936-b2661e00-a793-11eb-84ca-1401ade1bec4.png">
-	  <img width="415" height="254" src="https://user-images.githubusercontent.com/77045083/116245971-bb56ef80-a793-11eb-9b90-56ce9a273465.png">
-	  <img width="415" height="277" src="https://user-images.githubusercontent.com/77045083/116245953-b6923b80-a793-11eb-9c32-c111584b7fd3.png">
-	  <img width="415" src="https://user-images.githubusercontent.com/77045083/116245993-bf830d00-a793-11eb-8131-338bb7aa8f9d.png">
+	<img width="415" height="214" src="https://i.ibb.co/NFYdXsq/polos1.png">
+	<img width="415" src="https://i.ibb.co/NSTJsMx/polos2.png">
+	<img width="415" src="https://i.ibb.co/HDTyCsm/polos3.png">
+	<img width="415" src="https://i.ibb.co/HXLRFHM/polos4.png">
+	<img width="415" src="https://i.ibb.co/qm3BZrD/polos5.png">
+	<img width="415" src="https://i.ibb.co/wcKv2c9/polos6.png">
+	<img width="415" src="https://i.ibb.co/wr99cGj/polos7.png">
+	<img width="415" src="https://i.ibb.co/jwzsCbx/polos8.png">
   </span>
 
 ## Live Demo
